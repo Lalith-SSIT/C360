@@ -1,0 +1,10 @@
+langchain-community
+langchain-core
+langgraph
+sqlalchemy
+pyodbc
+chromadb
+streamlit
+pandas
+python-dotenv
+configparser
