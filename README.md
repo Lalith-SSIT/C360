@@ -5,6 +5,8 @@ A comprehensive customer intelligence platform that combines SQL database queryi
 
 ## Architecture
 
+![C360 Architecture](images/graph.png)
+
 - **Agents**: Modular agent system with specialized capabilities
 - **Utils**: Shared utilities for database connections, vector stores, and configurations
 - **Data**: Customer data including accounts, opportunities, activities, and products
