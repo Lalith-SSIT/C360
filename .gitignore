@@ -4,8 +4,7 @@
 # Development files
 rough.py
 
-# Images (if not needed in repo)
-/images
+/data
 
 # Python
 __pycache__/
@@ -40,10 +39,6 @@ ENV/
 *.swp
 *.swo
 
-# Database
-*.db
-*.sqlite3
-chroma_index_dir/
 
 # Logs
 *.log
