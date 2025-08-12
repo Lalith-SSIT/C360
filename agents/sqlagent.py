@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 # SQL Server connection configuration - initialize once
 connection_string = "mssql+pyodbc://@DESKTOP-4J53D2I\\C360/C360?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
 engine = create_engine(connection_string)
-db = SQLDatabase(engine=engine, include_tables=["Opportunity", "Account", "Product", "Activity"])
+db = SQLDatabase(engine=engine, include_tables=["Opportunity", "Account", "Product", "Support_Ticket", "Pipeline", "Activity", "Contract"])
 
 sql_query_tool = QuerySQLDatabaseTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
 sql_querychecker_tool = QuerySQLCheckerTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
@@ -35,7 +35,7 @@ The CRM contains structured tables with the following entities:
 3. Pipeline: Table of Deal progress with stages, close probability, deal size, and expected close dates.
 4. Opportunity: Table of Product-linked opportunities with status, revenue, and creation/close dates.
 5. Contract: Table of Active or expired contracts with values, types, and renewal status.
-6. Support: Table of Customer support issues linked to contracts with resolution times and satisfaction scores.
+6. Support_Ticket: Table of Customer support issues linked to contracts with resolution times and satisfaction scores.
 7. Product: Table of Metadata on all products and pricing details, including discounts and launch status.
 
 Your job is to:

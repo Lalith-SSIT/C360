@@ -38,9 +38,11 @@ First line: agent name (sql_agent or rag_agent)
 Second line: reasoning
 
 Example:
+Query: "Tell me all the products that comes under software products"
 sql_agent
-Because the query asks for a specific count of records (top 5) with a measurable criteria.
+Because the query asks for products that are filtered based on the category=software.
 
+Query: "Summarize the data available in opportunities"
 rag_agent
 Because the query asks for comprehensive/entire data which is unstructured and large."""
     

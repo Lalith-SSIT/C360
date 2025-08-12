@@ -76,4 +76,4 @@ if __name__ == "__main__":
         if "messages" in event and event["messages"]:
             last_msg = event["messages"][-1]
             if hasattr(last_msg, 'content') and last_msg.content != "end":
-                print(last_msg)
+                print(last_msg.pretty_print())
