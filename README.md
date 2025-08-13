@@ -37,3 +37,10 @@ python app.py
 - LangChain and Langgraph for agent creation and orchestration
 - ChromaDB for vector storage
 - SQL Server for storing structured data
+
+## Future Scope
+- Adding guardrails for PII and optimizing simple response time.
+- Supervisor with a simple classification model
+- Setup persistent caching mechanism
+- Setup fallback for sql
+- Enabling artifacts mode if required

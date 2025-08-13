@@ -1,15 +1,10 @@
 from langgraph.graph import StateGraph, START, END
-from dotenv import load_dotenv
-import os
-from huggingface_hub import login
 from agents.supervisor import supervisor_node
 from agents.ragagent import ragagent_node, ragtools_node
 from agents.sqlagent import sqlagent_node, sqltools_node, sqltools
 from utils.statehandler import AgentState
 from langgraph.prebuilt import tools_condition
 
-load_dotenv()
-login(os.getenv("HUGGINGFACEHUB_API_TOKEN"))
 
 def route_supervisor(state):
     return state.get("next", "RAG Agent")

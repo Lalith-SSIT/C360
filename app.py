@@ -1,10 +1,17 @@
+import os
+from dotenv import load_dotenv
+from huggingface_hub import login
+load_dotenv()
+login(os.getenv("HUGGINGFACEHUB_API_TOKEN"))
+
+
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import uvicorn
 import uuid
 import json
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, Optional
 from datetime import datetime, timedelta
 from graph import app as graph_app
 
