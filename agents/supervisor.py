@@ -2,7 +2,7 @@ from utils.statehandler import AgentState
 # from langgraph.types import Command
 from utils.globals import CHAT_MODEL
 from utils.agentutils import create_agent
-from utils.retriever import retrieve_documents
+# from utils.retriever import retrieve_documents
 
 
 def supervisor_node(state: AgentState):

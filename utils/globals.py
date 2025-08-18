@@ -21,7 +21,7 @@ CODE_MODEL = ChatOllama(
     top_k=2
 )
 
-# CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
-#     temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40)
+CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
+    temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40)
 
-CHAT_MODEL = ChatOpenAI(model="gpt-4o-mini-2024-07-18")
+# CHAT_MODEL = ChatOpenAI(model="gpt-4o-mini-2024-07-18")

@@ -1,0 +1,26 @@
+define user greeting
+  "hi" or "hello" or "hey" or "good morning" or "good afternoon"
+
+define user help request
+  "help" or "what can you do" or "how to use"
+
+define flow greeting flow
+  user greeting
+  bot respond to greeting
+
+define flow help flow
+  user help request
+  bot provide help
+
+define bot respond to greeting
+  "Hello! I'm your C360 Customer Intelligence Assistant. I can help you with customer data, opportunities, accounts, products, and support tickets. What would you like to know?"
+
+define bot provide help
+  "I can help you with:
+  - Customer account information
+  - Opportunity analysis
+  - Product data queries
+  - Support ticket insights
+  - Pipeline analysis
+  
+  Just ask me questions like 'Show me top 5 accounts' or 'What opportunities are in the pipeline?'"

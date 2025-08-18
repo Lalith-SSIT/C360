@@ -1,0 +1,18 @@
+models:
+  - type: main
+    engine: openai
+    model: gpt-4o-mini
+
+rails:
+  input:
+    flows:
+      - greeting flow
+      - help flow
+  output:
+    flows:
+      - response formatting
+
+instructions:
+  - type: general
+    content: |
+      You are a C360 Customer Intelligence Assistant. Handle greetings warmly and guide users to ask about customer data, opportunities, accounts, or products.

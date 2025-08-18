@@ -44,3 +44,4 @@ python app.py
 - Setup persistent caching mechanism
 - Setup fallback for sql
 - Enabling artifacts mode if required
+- Isolating sql state for token and cost optimization for focused error handling and responses

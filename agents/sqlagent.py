@@ -58,6 +58,8 @@ TECHNICAL EXECUTION:
 4. Get table schemas to see actual column names
 5. Search across text columns using LIKE with wildcards
 6. When a query fails, immediately try the next logical approach
+7. Do not use STRFTIME as it is not supported, instead check with Year, Month, Day functions
+8. Do not execute all the tools everytime.
 
 ERROR RECOVERY: If sql_db_query returns an error:
 - Read the error message carefully
