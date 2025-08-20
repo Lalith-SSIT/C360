@@ -76,7 +76,7 @@ from langchain_core.tools import tool
 sql_query_tool = QuerySQLDatabaseTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
 sql_querychecker_tool = QuerySQLCheckerTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
 sql_list_database_tool = ListSQLDatabaseTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
-sql_schema_tool = InfoSQLDatabaseTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
+# sql_schema_tool = InfoSQLDatabaseTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
 
 # class SQLQueryTool(QuerySQLDatabaseTool):
 #     """
