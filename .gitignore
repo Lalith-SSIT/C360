@@ -5,6 +5,7 @@
 rough.py
 
 /data
+/backup
 
 # Python
 __pycache__/

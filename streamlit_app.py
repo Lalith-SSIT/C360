@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 import time
+import pandas as pd
+import io
 
 st.set_page_config(page_title="C360 - Customer Intelligence", page_icon="🎯")
 
@@ -21,11 +23,13 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 if "session_id" not in st.session_state:
     st.session_state.session_id = None
-
 # Display existing messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
+        # if message["role"] == "assistant" and "files" in message and message["files"]:
+        #     for filepath in message["files"]:
+        #         st.dataframe(pd.read_csv(filepath))
 
 user_query = st.chat_input("Ask a question", key="user_input")
 if user_query:
@@ -46,5 +50,12 @@ if user_query:
             st.session_state.session_id = response_data["session_id"]
         
         # st.write(response_data["response"])
+        
+        # # Display dataframes for current response
+        # if response_data["files"] != None:
+        #     for filepath in response_data["files"]:
+        #         st.dataframe(pd.read_csv(filepath))
+        
+        # st.session_state.messages.append({"role": "assistant", "content": response_data["response"], "files": response_data["files"]})
         st.session_state.messages.append({"role": "assistant", "content": response_data["response"]})
         st.rerun()

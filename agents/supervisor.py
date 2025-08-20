@@ -47,10 +47,10 @@ rag_agent
 Because the query asks for comprehensive/entire data which is unstructured and large."""
     
     model = create_agent(CHAT_MODEL, system_message=system_prompt, tools=[])
-    response = model.invoke([
-        {"role": "user", "content": latest_message}
-    ])
-
+    # response = model.invoke([
+    #     {"role": "user", "content": latest_message}
+    # ])
+    response = model.invoke(state["messages"])
     response_text = response.content.strip() if hasattr(response, "content") else str(response).strip()
     
     # Extract agent from first line

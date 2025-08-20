@@ -9,19 +9,42 @@ from langgraph.prebuilt import tools_condition
 def route_supervisor(state):
     return state.get("next", "RAG Agent")
 
-def human_input_node(state):
-    """Get user input and continue conversation"""
-    user_input = input("\nYour question (type 'end' to quit): ")
-    if user_input.lower() == 'end':
-        return {"messages": [("user", "end")], "next": "END"}
-    return {"messages": [("user", user_input)]}
+# def file_parser_node(state):
+#     """Parse file paths from agent response and add to state"""
+#     files = []
+    
+#     # Check if response contains file_path
+#     if state["messages"] and hasattr(state["messages"][-1], 'content'):
+#         content = state["messages"][-1].content
+#         if "file_path=" in content:
+#             # Extract file path
+#             lines = content.split('\n')
+#             for line in lines:
+#                 if line.startswith("file_path="):
+#                     filepath = line.replace("file_path=", "")
+#                     files.append(filepath)
+            
+#             # Clean the response content
+#             state["messages"][-1].content = content.replace(f"file_path={filepath}", "").strip()
+    
+#     result = {"messages": state["messages"]}
+#     if files:
+#         result["files"] = files
+#     return result
 
-def should_continue(state):
-    """Check if conversation should continue"""
-    last_message = state["messages"][-1] if state["messages"] else None
-    if last_message and hasattr(last_message, 'content') and last_message.content == "end":
-        return "END"
-    return "Supervisor"
+# def human_input_node(state):
+#     """Get user input and continue conversation"""
+#     user_input = input("\nYour question (type 'end' to quit): ")
+#     if user_input.lower() == 'end':
+#         return {"messages": [("user", "end")], "next": "END"}
+#     return {"messages": [("user", user_input)]}
+
+# def should_continue(state):
+#     """Check if conversation should continue"""
+#     last_message = state["messages"][-1] if state["messages"] else None
+#     if last_message and hasattr(last_message, 'content') and last_message.content == "end":
+#         return "END"
+#     return "Supervisor"
 
 # Under development
 def error_fallback(state):
@@ -33,7 +56,7 @@ def error_fallback(state):
 
 
 graph = StateGraph(AgentState)
-graph.add_node('Human', human_input_node)
+# graph.add_node('Human', human_input_node)
 graph.add_node('Supervisor', supervisor_node)
 graph.add_node('RAG Agent', ragagent_node)
 graph.add_node('SQL Agent', sqlagent_node)

@@ -8,3 +8,12 @@ streamlit
 pandas
 python-dotenv
 configparser
+fastapi
+uvicorn
+pydantic
+langchain
+ollama
+langchain-ollama
+langchain-google-genai
+langchain-chroma
+sentence-transformers

@@ -19,10 +19,9 @@ def chunk_data(file_path):
     return docs
 
 # Usage
-docs = chunk_data("opportunities_dict.txt")
+docs = chunk_data("opportunitie_dict.txt")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-
 
 chroma_vectorstore = Chroma(
     embedding_function=embeddings,

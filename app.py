@@ -63,13 +63,24 @@ def chat(request: ChatRequest):
     session['messages'].append(("user", request.query))
     session['last_activity'] = datetime.now()
     
-    response = graph_app.invoke(
-        {"messages": session['messages']},
-        {"recursion_limit": 150},
+    try:
+        response = graph_app.invoke(
+            {"messages": session['messages'][-5:]},
+            {"recursion_limit": 150},
         )
-    
-    session["messages"].append(("assistant", response["messages"][-1].content))
-    return {"response": response["messages"][-1].content, "session_id": session_id} if not isinstance(response, HumanMessage) else "Nothing to respond"
+        
+        if response and "messages" in response and response["messages"] and hasattr(response["messages"][-1], 'content'):
+            content = response["messages"][-1].content
+            session["messages"].append(("assistant", content))
+            
+            # if response["files"] != None:
+            #     return {"response": content, "session_id": session_id, "files": response["files"]}
+            
+            return {"response": content, "session_id": session_id}
+        else:
+            return {"response": "No response from model", "session_id": session_id}
+    except:
+        return {"response": "No response from model", "session_id": session_id}
 
     # def generate_stream():
         # events = graph_app.stream(
