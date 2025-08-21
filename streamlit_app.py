@@ -27,9 +27,9 @@ if "session_id" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
-        # if message["role"] == "assistant" and "files" in message and message["files"]:
-        #     for filepath in message["files"]:
-        #         st.dataframe(pd.read_csv(filepath))
+        if message["role"] == "assistant" and "files" in message and message["files"]:
+            for filepath in message["files"]:
+                st.dataframe(pd.read_csv(filepath))
 
 user_query = st.chat_input("Ask a question", key="user_input")
 if user_query:
@@ -49,13 +49,13 @@ if user_query:
         if response_data["session_id"]:
             st.session_state.session_id = response_data["session_id"]
         
-        # st.write(response_data["response"])
+        st.write(response_data["response"])
         
-        # # Display dataframes for current response
-        # if response_data["files"] != None:
-        #     for filepath in response_data["files"]:
-        #         st.dataframe(pd.read_csv(filepath))
+        # Display dataframes for current response
+        if "files" in response_data and response_data["files"]:
+            for filepath in response_data["files"]:
+                st.dataframe(pd.read_csv(filepath))
         
-        # st.session_state.messages.append({"role": "assistant", "content": response_data["response"], "files": response_data["files"]})
-        st.session_state.messages.append({"role": "assistant", "content": response_data["response"]})
+        st.session_state.messages.append({"role": "assistant", "content": response_data["response"], "files": response_data["files"]})
+        # st.session_state.messages.append({"role": "assistant", "content": response_data["response"]})
         st.rerun()

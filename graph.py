@@ -1,13 +1,17 @@
+from dotenv import load_dotenv
+load_dotenv()
 from langgraph.graph import StateGraph, START, END
 from agents.supervisor import supervisor_node
 from agents.ragagent import ragagent_node, ragtools_node
 from agents.sqlagent import sqlagent_node, sqltools_node, sqltools
+from agents.analysisagent import analysisagent_node
+from agents.businessagent import businessagent_node
 from utils.statehandler import AgentState
 from langgraph.prebuilt import tools_condition
 
 
 def route_supervisor(state):
-    return state.get("next", "RAG Agent")
+    return state.get("next", "Business Agent")
 
 # def file_parser_node(state):
 #     """Parse file paths from agent response and add to state"""
@@ -60,16 +64,20 @@ graph = StateGraph(AgentState)
 graph.add_node('Supervisor', supervisor_node)
 graph.add_node('RAG Agent', ragagent_node)
 graph.add_node('SQL Agent', sqlagent_node)
+graph.add_node('Analysis Agent', analysisagent_node)
+graph.add_node('Business Agent', businessagent_node)
 graph.add_node('RAG_Tools', ragtools_node)
 graph.add_node('SQL_Tools', sqltools_node)
 
 graph.add_edge(START, 'Supervisor')
 # graph.add_conditional_edges('Human', should_continue, {"Supervisor": "Supervisor", "END": END})
-graph.add_conditional_edges('Supervisor', route_supervisor, {"RAG Agent": "RAG Agent", "SQL Agent": "SQL Agent"})
-graph.add_conditional_edges('RAG Agent', tools_condition, {"tools": "RAG_Tools", "__end__": END})
-graph.add_conditional_edges('SQL Agent', tools_condition, {"tools": "SQL_Tools", "__end__": END})
+graph.add_conditional_edges('Supervisor', route_supervisor, {"RAG Agent": "RAG Agent", "SQL Agent": "SQL Agent", "Analysis Agent": "Analysis Agent", "Business Agent": "Business Agent"})
+graph.add_conditional_edges('RAG Agent', tools_condition, {"tools": "RAG_Tools", "__end__": "Supervisor"})
+graph.add_conditional_edges('SQL Agent', tools_condition, {"tools": "SQL_Tools", "__end__": "Supervisor"})
+graph.add_edge('Analysis Agent', 'Supervisor')
 graph.add_edge('RAG_Tools', 'RAG Agent')
 graph.add_edge('SQL_Tools', 'SQL Agent')
+graph.add_edge('Business Agent', END)
 app = graph.compile()
        
 

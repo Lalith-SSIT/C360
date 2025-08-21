@@ -73,13 +73,14 @@ def chat(request: ChatRequest):
             content = response["messages"][-1].content
             session["messages"].append(("assistant", content))
             
-            # if response["files"] != None:
-            #     return {"response": content, "session_id": session_id, "files": response["files"]}
+            if response["files"] != None:
+                return {"response": content, "session_id": session_id, "files": response["files"]}
             
             return {"response": content, "session_id": session_id}
         else:
-            return {"response": "No response from model", "session_id": session_id}
-    except:
+            return {"response": "Improper response from model", "session_id": session_id}
+    except Exception as e:
+        print(f"Exception at endpoint: {e}")
         return {"response": "No response from model", "session_id": session_id}
 
     # def generate_stream():
