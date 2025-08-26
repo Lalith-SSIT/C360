@@ -17,3 +17,7 @@ langchain-ollama
 langchain-google-genai
 langchain-chroma
 sentence-transformers
+tabulate
+langchain-experimental
+nemoguardrails
+langchain-openai

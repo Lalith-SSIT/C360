@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from huggingface_hub import login
 load_dotenv()
-login(os.getenv("HUGGINGFACEHUB_API_TOKEN"))
+login(token=os.getenv("HUGGINGFACEHUB_API_TOKEN"))
 
 
 from fastapi import FastAPI
@@ -12,9 +12,13 @@ from pydantic import BaseModel
 import uvicorn
 import uuid
 import json
+import logging
 from typing import Dict, Optional
 from datetime import datetime, timedelta
 from graph import app as graph_app
+from utils.logger import get_c360_logger
+
+server_logger = get_c360_logger('server_app', level=logging.INFO, console=True)
 
 api = FastAPI()
 
@@ -40,6 +44,9 @@ def get_sessions():
 
 @api.post("/chat")
 def chat(request: ChatRequest):
+    # Log incoming request
+    server_logger.info(f"Received chat request: {request.query}")
+    
     # cleanup_expired_sessions()
     
     # Create new session or get existing
@@ -49,13 +56,16 @@ def chat(request: ChatRequest):
             'messages': [],
             'last_activity': datetime.now()
         }
+        server_logger.info(f"Created new session: {session_id}")
     else:
         session_id = request.session_id
+        server_logger.info(f"Using existing session: {session_id}")
     
     session = sessions[session_id]
     
     # Handle end command
     if request.query.lower() == 'end':
+        server_logger.info(f"Session ended: {session_id}")
         # del sessions[session_id]
         return ChatResponse(response="Session ended", session_id=session_id)
     
@@ -64,6 +74,7 @@ def chat(request: ChatRequest):
     session['last_activity'] = datetime.now()
     
     try:
+        server_logger.info(f"Processing query with graph app for session: {session_id}")
         response = graph_app.invoke(
             {"messages": session['messages'][-5:]},
             {"recursion_limit": 150},
@@ -71,15 +82,22 @@ def chat(request: ChatRequest):
         
         if response and "messages" in response and response["messages"] and hasattr(response["messages"][-1], 'content'):
             content = response["messages"][-1].content
+            if isinstance(content, list):
+                content = "\n".join(content)
             session["messages"].append(("assistant", content))
             
-            # if response["files"] != None:
-            #     return {"response": content, "session_id": session_id, "files": response["files"]}
+            server_logger.info(f"Generated response for session {session_id}: {content[:100]}...")
+            
+            if response["files"] != None:
+                server_logger.info(f"Response includes files: {response['files']}")
+                return {"response": content, "session_id": session_id, "files": response["files"]}
             
             return {"response": content, "session_id": session_id}
         else:
-            return {"response": "No response from model", "session_id": session_id}
-    except:
+            server_logger.warning(f"Improper response from model for session: {session_id}")
+            return {"response": "Improper response from model", "session_id": session_id}
+    except Exception as e:
+        server_logger.error(f"Exception at endpoint for session {session_id}: {e}")
         return {"response": "No response from model", "session_id": session_id}
 
     # def generate_stream():
@@ -104,4 +122,5 @@ def chat(request: ChatRequest):
     # return StreamingResponse(generate_stream(), media_type="text/plain")
 
 if __name__ == "__main__":
+    server_logger.info("Starting C360 server on port 8000")
     uvicorn.run(api, host="0.0.0.0", port=8000)

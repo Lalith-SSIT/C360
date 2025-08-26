@@ -7,4 +7,4 @@ class AgentState(TypedDict):
     next: str
     current: str
     counter: int
-    # files: Annotated[List[str], lambda x, y: x + y]
+    files: Annotated[List[str], lambda x, y: x + y]

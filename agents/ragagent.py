@@ -1,6 +1,6 @@
 import json
 from utils.statehandler import AgentState
-from utils.globals import CHAT_MODEL
+from utils.globals import CHAT_MODEL, FALLBACK_MODEL
 from utils.retriever import retrieve_documents
 from langchain_core.tools import tool
 from typing_extensions import Annotated, Optional
@@ -38,7 +38,11 @@ def ragagent_node(state: AgentState):
     system_prompt = """You MUST always call the retrieve_documents_tool first to get relevant information before answering any query. 
     Use the user's query as the search parameter. After getting the documents, provide a detailed answer based on the retrieved information."""
     
-    model = create_agent(CHAT_MODEL, system_message=system_prompt, tools=ragtools)
-    response = model.invoke(state["messages"])
+    try:
+        model = create_agent(CHAT_MODEL, system_message=system_prompt, tools=ragtools)
+        response = model.invoke(state["messages"])
+    except Exception:
+        model = create_agent(FALLBACK_MODEL, system_message=system_prompt, tools=ragtools)
+        response = model.invoke(state["messages"])
     
     return {"messages": [response]}
