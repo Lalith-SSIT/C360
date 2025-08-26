@@ -2,14 +2,17 @@
 
 A comprehensive customer intelligence platform that combines SQL database querying with RAG (Retrieval-Augmented Generation) capabilities for enhanced customer insights.
 
-
 ## Architecture
 
 ![C360 Architecture](images/graph.png)
 
-- **Agents**: Modular agent system with specialized capabilities
-- **Utils**: Shared utilities for database connections, vector stores, and configurations
-- **Data**: Customer data including accounts, opportunities, activities, and products
+### Agent System
+- **Supervisor Agent**: Routes queries to appropriate specialized agents
+- **SQL Agent**: Handles database queries and structured data analysis
+- **RAG Agent**: Processes unstructured data using vector search
+- **Analysis Agent**: Performs data analysis and generates insights
+- **Business Agent**: Provides business-focused recommendations
+
 
 ## Setup
 
@@ -20,11 +23,15 @@ pip install -r requirements.txt
 
 2. Configure environment variables in `.env` file
 
-3. Install ollama locally and microsoft sql server
+3. Install Ollama locally and Microsoft SQL Server
 
-3. Run the application:
+4. Run the application:
 ```bash
+# Console application
 python app.py
+
+# Streamlit web interface
+streamlit run streamlit_app.py
 ```
 
 ## Data Sources
@@ -34,14 +41,25 @@ python app.py
 
 ## Technologies Used
 
-- LangChain and Langgraph for agent creation and orchestration
-- ChromaDB for vector storage
-- SQL Server for storing structured data
+- **LangChain & LangGraph**: Agent creation and orchestration
+- **ChromaDB**: Vector storage for RAG capabilities
+- **SQL Server**: Structured data storage
+- **Streamlit**: Web interface
+- **Ollama**: Local LLM inference
+- **Pandas**: Data manipulation and CSV export
+
+## Recent Updates
+
+- ✅ Added specialized Analysis and Business agents
+- ✅ Implemented automated CSV export functionality
+- ✅ Enhanced supervisor agent with improved query routing
+- ✅ Updated Streamlit interface with better user experience
 
 ## Future Scope
-- Adding guardrails for PII and optimizing simple response time.
-- Supervisor with a simple classification model
+
+- Optimizing response time for simple queries
 - Setup persistent caching mechanism
-- Setup fallback for sql
-- Enabling artifacts mode if required
-- Isolating sql state for token and cost optimization for focused error handling and responses
+- Setup fallback mechanisms for SQL queries
+- Enabling artifacts mode for enhanced outputs
+- Isolating SQL state for token and cost optimization
+- Advanced analytics dashboard
