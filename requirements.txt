@@ -21,3 +21,4 @@ tabulate
 langchain-experimental
 nemoguardrails
 langchain-openai
+langchain-huggingface
