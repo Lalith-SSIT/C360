@@ -20,3 +20,4 @@ sentence-transformers
 tabulate
 langchain-experimental
 nemoguardrails
+langchain-openai

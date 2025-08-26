@@ -3,12 +3,14 @@ from utils.globals import CHAT_MODEL, CODE_MODEL, TODAY, FALLBACK_MODEL
 from utils.agentutils import create_agent
 from langgraph.prebuilt import ToolNode
 from langchain_community.tools.sql_database.tool import ListSQLDatabaseTool, QuerySQLCheckerTool, QuerySQLDatabaseTool, InfoSQLDatabaseTool
-from sqlalchemy import create_engine
-import ast
+from sqlalchemy import create_engine, text
 import pandas as pd
 import os
 import datetime
 import uuid
+from typing import Annotated
+from langgraph.prebuilt import InjectedState
+from langchain_core.tools import tool
 
 # SQL Server connection configuration - initialize once
 connection_string = "mssql+pyodbc://@DESKTOP-4J53D2I\\C360/C360?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
@@ -18,9 +20,6 @@ db = SQLDatabase(engine=engine, include_tables=["Opportunity", "Account", "Produ
 # Module-level variable to track current session's files
 # _current_session_files = []
 
-from typing import Annotated
-from langgraph.prebuilt import InjectedState
-from langchain_core.tools import tool
 
 @tool(parse_docstring=True)
 def sql_query_tool(
@@ -35,25 +34,26 @@ def sql_query_tool(
         query: A detailed and correct SQL query.
     """
     
-    # Your existing SQL execution logic
-    db_tool = QuerySQLDatabaseTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
-    raw_output = db_tool._run(query)
+    # Execute query directly to get column names and data
+    # db_tool = QuerySQLDatabaseTool(db=db, llm=CODE_MODEL, handle_tool_error=True)
+    # raw_output = db_tool._run(query)
     
-    # Check if raw_output is an error message
-    # if isinstance(raw_output, str) and ("Error:" in raw_output or "error" in raw_output.lower()):
-    #     return raw_output
-    
-    # Your existing parsing logic
-    if isinstance(raw_output, str):
-        try:
-            parsed_output = eval(raw_output, {"datetime": datetime})
-        except Exception as e:
-            return f"{raw_output}"
-    else:
-        parsed_output = raw_output
+    try:
+        with engine.connect() as conn:
+            result = conn.execute(text(query))
+            columns = list(result.keys())
+            rows = result.fetchall()
+            
+            if not rows:
+                return "No data found for the query."
+            
+            # Convert to list of tuples for DataFrame
+            parsed_output = [tuple(row) for row in rows]
+            df = pd.DataFrame(parsed_output, columns=columns)
+    except Exception as e:
+        return f"Error executing query: {str(e)} with query: {query}"
 
-    if isinstance(parsed_output, list) and len(parsed_output) > 0:
-        df = pd.DataFrame(parsed_output)
+    if len(parsed_output) > 0:
         if len(df) > 1:
             # Create file
             os.makedirs("outputs", exist_ok=True)

@@ -6,6 +6,7 @@ rough.py
 
 /data
 /backup
+/outputs
 
 # Python
 __pycache__/
