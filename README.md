@@ -2,14 +2,6 @@
 
 A comprehensive customer intelligence platform that combines SQL database querying with RAG (Retrieval-Augmented Generation) capabilities for enhanced customer insights.
 
-## Features
-
-- **Multi-Agent Architecture**: Specialized agents for different data analysis tasks
-- **Intelligent Query Routing**: Supervisor agent routes queries to appropriate specialized agents
-- **Data Export**: Automated CSV export functionality for analysis results
-- **Guardrails Integration**: Built-in PII protection and content filtering
-- **Streamlit Interface**: User-friendly web interface for interactive queries
-
 ## Architecture
 
 ![C360 Architecture](images/graph.png)
@@ -20,12 +12,7 @@ A comprehensive customer intelligence platform that combines SQL database queryi
 - **RAG Agent**: Processes unstructured data using vector search
 - **Analysis Agent**: Performs data analysis and generates insights
 - **Business Agent**: Provides business-focused recommendations
-- **Guardrails Agent**: Ensures PII protection and content safety
 
-### Core Components
-- **Utils**: Shared utilities for database connections, vector stores, and configurations
-- **Data**: Customer data including accounts, opportunities, activities, and products
-- **Outputs**: Automated CSV export directory for analysis results
 
 ## Setup
 
@@ -59,7 +46,6 @@ streamlit run streamlit_app.py
 - **SQL Server**: Structured data storage
 - **Streamlit**: Web interface
 - **Ollama**: Local LLM inference
-- **NeMo Guardrails**: PII protection and content filtering
 - **Pandas**: Data manipulation and CSV export
 
 ## Recent Updates
@@ -67,7 +53,6 @@ streamlit run streamlit_app.py
 - ✅ Added specialized Analysis and Business agents
 - ✅ Implemented automated CSV export functionality
 - ✅ Enhanced supervisor agent with improved query routing
-- ✅ Integrated guardrails for PII protection
 - ✅ Updated Streamlit interface with better user experience
 
 ## Future Scope

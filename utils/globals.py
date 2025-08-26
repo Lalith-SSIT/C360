@@ -46,4 +46,4 @@ else:
         temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40, rate_limiter=RATE_LIMITER)
 
 # Fallback model for all agents
-FALLBACK_MODEL = ChatOllama(model="deepseek-r1:70b", temperature=0.1)
+FALLBACK_MODEL = ChatOllama(model="llama3.1", temperature=0.1)

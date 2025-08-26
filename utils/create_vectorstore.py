@@ -19,7 +19,7 @@ def chunk_data(file_path):
     return docs
 
 # Usage
-docs = chunk_data("opportunitie_dict.txt")
+docs = chunk_data("opportunities_dict.txt")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
@@ -27,6 +27,11 @@ chroma_vectorstore = Chroma(
     embedding_function=embeddings,
     persist_directory="chroma_index_dir"
 )
-chroma_vectorstore.add_documents(documents=docs)
+
+batch_size = 5000
+for i in range(0, len(docs), batch_size):
+    batch = docs[i:i + batch_size]
+    chroma_vectorstore.add_documents(documents=batch)
+# chroma_vectorstore.add_documents(documents=docs)
 
 chroma_vectorstore.persist()
