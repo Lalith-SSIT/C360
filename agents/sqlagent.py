@@ -13,7 +13,8 @@ from langgraph.prebuilt import InjectedState
 from langchain_core.tools import tool
 
 # SQL Server connection configuration - initialize once
-connection_string = "mssql+pyodbc://@DESKTOP-4J53D2I\\C360/C360?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
+# connection_string = "mssql+pyodbc://@DESKTOP-4J53D2I\\C360/C360?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
+connection_string = "postgresql+psycopg2://postgres:YourStrong!Passw0rd@postgres:5432/C360"
 engine = create_engine(connection_string)
 db = SQLDatabase(engine=engine, include_tables=["Opportunity", "Account", "Product", "Support_Ticket", "Pipeline", "Activity", "Contract"])
 

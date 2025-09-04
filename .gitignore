@@ -3,10 +3,14 @@
 
 # Development files
 rough.py
+json_to_pgvector.py
 
 /data
 /backup
 /outputs
+/pgdata
+/sales-container
+/init
 
 # Python
 __pycache__/
@@ -48,3 +52,7 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Container files
+docker-compose.yml
+sales-container.zip

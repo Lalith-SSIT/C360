@@ -22,3 +22,6 @@ langchain-experimental
 nemoguardrails
 langchain-openai
 langchain-huggingface
+psycopg2-binary
+numpy
+langchain-postgres
