@@ -19,8 +19,8 @@ embeddings = HuggingFaceEmbeddings(
 
 vector_store = PGVector(
     connection=connection_string,
-    embedding_function=embeddings,
-    collection_name="documents"
+    embeddings=embeddings,
+    collection_name="c360"
 )
 
 @tool
