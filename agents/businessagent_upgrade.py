@@ -18,7 +18,7 @@ embeddings = HuggingFaceEmbeddings(
 )
 
 vector_store = PGVector(
-    connection_string=connection_string,
+    connection=connection_string,
     embedding_function=embeddings,
     collection_name="documents"
 )
@@ -78,6 +78,8 @@ def get_account(accountId: str) -> Dict:
         "name": results[0].metadata.get("account_name", "Unknown"),
         **account_data
     }
+
+tools = [docs_search, get_account]
 
 def businessagent_node(state: AgentState):
     """
