@@ -20,6 +20,9 @@ if "session_id" not in st.session_state:
     st.session_state.session_id = None
 if "processing" not in st.session_state:
     st.session_state.processing = False
+# if "pending_query" not in st.session_state:
+#     st.session_state.pending_query = None
+
     
 # Display existing messages
 for message in st.session_state.messages:
@@ -34,8 +37,27 @@ def disable():
 
 
 
-user_query = st.chat_input("Ask a question", key="user_input", disabled=st.session_state.processing, on_submit=disable())
-# New Chat button
+
+# import streamlit.components.v1 as components
+# @st.dialog("This is a dialog")
+# def simple_dialog():
+#     # st.html("<a href='https://google.com'>Click me!</a>")
+#     # components.html("<a href='https://google.com'>Click me!</a>")
+#     option = st.selectbox(
+#         "Choose a query:",
+#         ["", "Count of my SOWs", "Name the suppliers I manage"],
+#         key="query_select"
+#     )
+#     if option:
+#         st.session_state.pending_query = option
+#         st.rerun()
+
+# if st.button("Open Dialog"):
+#     simple_dialog()
+
+# # user = st.text_input("Your Name", value="Hi", key="user_name")
+user_query = st.chat_input("Ask a question", key="user_input", on_submit=disable())
+
 with st.container(gap="small", horizontal_alignment="right", vertical_alignment="bottom"):
     if st.button("🔄", key="new_chat", help="Start a new conversation"):
         for key in list(st.session_state.keys()):
