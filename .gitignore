@@ -11,6 +11,7 @@ json_to_pgvector.py
 /pgdata
 /sales-container
 /init
+/models
 
 # Python
 __pycache__/

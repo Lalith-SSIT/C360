@@ -11,11 +11,11 @@ configparser
 fastapi
 uvicorn
 pydantic
-langchain
+langchain==0.3.27
 ollama
 langchain-ollama
 langchain-google-genai
-langchain-chroma
+langchain-chroma==0.2.5
 sentence-transformers
 tabulate
 langchain-experimental
