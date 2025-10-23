@@ -9,7 +9,7 @@ json_to_pgvector.py
 /backup
 /outputs
 /pgdata
-/sales-container
+/salescopilot
 /init
 /models
 
