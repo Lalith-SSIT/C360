@@ -13,22 +13,6 @@ rough.py
 /salescopilot
 /models
 *.zip
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-.env.local
-
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
 
 # Python
 __pycache__/
@@ -67,6 +51,19 @@ ENV/
 # Logs
 *.log
 
-# Container files
+# OS
+.DS_Store
+Thumbs.db
+
+# Additional files
 docker-compose.yml
 sales-container.zip
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore

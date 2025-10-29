@@ -1,16 +1,14 @@
 import streamlit as st
 import requests
-import time
 import pandas as pd
-import io
 import logging
 from utils.logger import get_c360_logger
 
 client_logger = get_c360_logger('streamlit_app', level=logging.INFO, console=True)
 
-st.set_page_config(page_title="C360 - Customer Intelligence")
+st.set_page_config(page_title="Sales Copilot - Customer Intelligence")
 
-st.title("C360 - Customer 360 Intelligence Platform")
+st.title("Sales Copilot - Customer 360 Intelligence Platform")
 st.markdown("Ask questions about your customer data using natural language")
 
 
@@ -79,8 +77,18 @@ with st.container(gap="small", horizontal_alignment="right", vertical_alignment=
         # Get and display assistant response
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                raw_response = requests.post("http://localhost:8000/chat", json={"query": user_query, "session_id": st.session_state.get("session_id", "")})
-                response_data = raw_response.json()
+                try:
+                    raw_response = requests.post("http://localhost:8000/chat", json={"query": user_query, "session_id": st.session_state.get("session_id", "")})
+                    raw_response.raise_for_status()  # Raise an exception for bad status codes
+                    response_data = raw_response.json()
+                except requests.exceptions.JSONDecodeError:
+                    st.error(f"Server returned invalid response: {raw_response.text[:200]}")
+                    st.session_state.processing = False
+                    raise
+                except requests.exceptions.RequestException as e:
+                    st.error(f"Request failed: {str(e)}")
+                    st.session_state.processing = False
+                    raise
             
             # Store session_id and display response
             if response_data["session_id"]:

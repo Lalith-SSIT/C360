@@ -8,13 +8,13 @@ from utils.agentutils import create_agent
 from langgraph.prebuilt import ToolNode
 
 @tool(parse_docstring=True)
-def retrieve_documents_tool(query: Annotated[str, "Detailed search query for which to retrieve documents."], k: Annotated[Optional[int], "The number of top documents to return. Defaults to 5."] = 5):
+def retrieve_documents_tool(query: Annotated[str, "Detailed search query for which to retrieve documents."], k: Annotated[Optional[int], "The number of top documents to return. Defaults to 5."] = 2):
     """
     Retrieve the top-k most relevant documents for a given query using an ensemble of semantic and keyword (BM25) retrieval.
 
     Args:
         query (str): Detailed search query for which to retrieve documents.
-        k (int, optional): The number of top documents to return. Defaults to 5.
+        k (int, optional): The number of top documents to return. Defaults to 2.
 
     Returns:
         List[dict]: A list of processed opportunity data as dictionaries.

@@ -1,13 +1,17 @@
 #!/bin/bash
 
-# Start Ollama service in background
-ollama serve &
+# Load and export environment variables (Enable this if you are running outside docker)
+# set -a
+# source .env.local
+# set +a
 
-# Wait for Ollama to be ready
-sleep 10
+# Start Streamlit in background
+streamlit run streamlit_app.py --server.port=8051 --server.address=0.0.0.0 &
+STREAMLIT_PID=$!
 
-# Start your application
+# Start FastAPI application
 python app.py &
 API_PID=$!
-sleep 10
-exec streamlit run streamlit_app.py --server.port=8051 --server.address=0.0.0.0
+
+# Wait for both processes
+wait $STREAMLIT_PID $API_PID

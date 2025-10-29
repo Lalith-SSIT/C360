@@ -4,6 +4,7 @@ from langchain_core import rate_limiters
 from langchain_openai import ChatOpenAI
 from datetime import datetime
 import configparser
+import os
 
 # Load config and initialize models
 config = configparser.ConfigParser()
@@ -31,19 +32,38 @@ CODE_MODEL = ChatOllama(
 )
 
 
-if provider == "openai":
-    CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'])
-elif provider == "gemini":
-    CHAT_MODEL = ChatGoogleGenerativeAI(
-        model=config['gemini']['chat_model'],
+try:
+    if provider == "openai":
+        CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'])
+    elif provider == "gemini":
+        api_key = os.getenv('GOOGLE_API_KEY')
+        if not api_key:
+            print("Warning: GOOGLE_API_KEY not found. Falling back to Ollama.")
+            raise ValueError("Missing API key")
+        CHAT_MODEL = ChatGoogleGenerativeAI(
+            model=config['gemini']['chat_model'],
+            temperature=0.1,
+            max_output_tokens=2048,
+            top_p=0.9, top_k=40,
+            rate_limiter=RATE_LIMITER,
+            google_api_key=api_key
+        )
+    else:
+        api_key = os.getenv('GOOGLE_API_KEY')
+        if not api_key:
+            print("Warning: GOOGLE_API_KEY not found. Falling back to Ollama.")
+            raise ValueError("Missing API key")
+        CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
+            temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40, rate_limiter=RATE_LIMITER, google_api_key=api_key)
+except Exception as e:
+    print(f"Failed to initialize {provider} model: {e}. Using Ollama fallback.")
+    CHAT_MODEL = ChatOllama(
+        model="llama3.1:latest",
         temperature=0.1,
-        max_output_tokens=2048,
-        top_p=0.9, top_k=40,
-        rate_limiter=RATE_LIMITER
+        max_tokens=2048,
+        top_p=0.9,
+        top_k=40
     )
-else:
-    CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
-        temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40, rate_limiter=RATE_LIMITER)
 
 # Fallback model for all agents
-FALLBACK_MODEL = ChatOllama(model="llama3.1", temperature=0.1)
+FALLBACK_MODEL = ChatOllama(model="llama3.1:latest", temperature=0.1)

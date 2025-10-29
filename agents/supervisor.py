@@ -8,7 +8,7 @@ from utils.agentutils import create_agent
 
 def supervisor_node(state: AgentState):
     """
-    Supervisor node that decides which agent to run based on the latest message using HuggingFace chat model.
+    Supervisor node that decides which agent to run based on the latest message.
     The LLM itself determines the next agent by returning 'sql_agent' or 'rag_agent'.
     """
 
@@ -40,14 +40,8 @@ def supervisor_node(state: AgentState):
 - If SQL collected raw data but explicitly states "Analysis decision: For further analysis" → analysis_agent
 - If SQL had errors and needs to retry → sql_agent
 
-**After Analysis Agent responds:**
-- If Analysis provided insights/results → business_agent (for final presentation)
-- If Analysis says needs different/more data → sql_agent (to get additional data)
-- If Analysis says cannot perform analysis → business_agent (to conclude)
-
 **After RAG Agent responds:**
 - If RAG provided comprehensive answer → business_agent (for final presentation)
-- If RAG suggests specific data queries → sql_agent
 
 **DECISION FRAMEWORK:**
 1. Is this the first message in conversation? → Route based on query type
@@ -94,6 +88,6 @@ Reason: [Why this agent should handle next step]"""
     elif "business_agent" in agent_line:
         next_agent = "Business Agent"
     else:
-        next_agent = "SQL Agent"  # Default fallback
+        next_agent = "Business Agent"  # Default fallback
     
     return {"next": next_agent}
