@@ -72,3 +72,4 @@ ENV/
 # Container files
 docker-compose.yml
 sales-container.zip
+Dockerfile
