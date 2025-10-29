@@ -1,7 +1,12 @@
 # Environment variables
 .env
+<<<<<<< HEAD
 .env.dev
 .env.local
+=======
+.env.local
+.env.dev
+>>>>>>> dev
 
 # Development files
 rough.py
@@ -72,3 +77,4 @@ ENV/
 # Container files
 docker-compose.yml
 sales-container.zip
+Dockerfile

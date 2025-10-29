@@ -1,5 +1,9 @@
 # Environment variables
 .env
+<<<<<<< HEAD
+=======
+.env.local
+>>>>>>> dev
 
 # Development files
 rough.py
