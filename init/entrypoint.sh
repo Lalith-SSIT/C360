@@ -1,15 +1,9 @@
 #!/bin/bash
 set -e
 # automatically export all variables (Enable this if you are running outside docker)
-<<<<<<< HEAD
-# set -a
-# source .env.local
-# set +a  # stop auto-exporting
-=======
 set -a
-source .env.dev
+source .env.local
 set +a  # stop auto-exporting
->>>>>>> dev
 
 if [ ! -f "/app/.initialized" ]; then
   echo "Running initial setup..."
