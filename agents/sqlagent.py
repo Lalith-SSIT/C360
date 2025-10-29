@@ -9,10 +9,16 @@ import os
 from typing import Annotated
 from langgraph.prebuilt import InjectedState
 from langchain_core.tools import tool
+from urllib.parse import quote_plus
 
-# SQL Server connection configuration - initialize once
-# connection_string = "mssql+pyodbc://@DESKTOP-4J53D2I\\C360/C360?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
-connection_string = "postgresql+psycopg2://postgres:YourStrong!Passw0rd@postgres:5432/C360"
+# Database connection configuration from environment variables
+db_host = os.getenv('DB_HOST')
+db_port = os.getenv('DB_PORT')
+db_user = os.getenv('DB_USER')
+db_password = quote_plus(os.getenv('DB_PASSWORD'))
+db_name = os.getenv('DB_NAME', 'sales_copilot')
+
+connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 engine = create_engine(connection_string)
 db = SQLDatabase(engine=engine, include_tables=["opportunity", "account", "product", "support_ticket", "pipeline", "activity", "contract"])
 
@@ -131,13 +137,13 @@ def sqlagent_node(state):
 
 TABLES:
 The CRM contains structured tables with the following entities:
-1. Account: Table of Company-level metadata including industry, region, lifecycle stage, account score, and contact details.
-2. Activity: Table of Sales and marketing engagement logs (type, outcome, score, action items).
-3. Pipeline: Table of Deal progress with stages, close probability, deal size, and expected close dates.
-4. Opportunity: Table of Product-linked opportunities with status, revenue, and creation/close dates.
-5. Contract: Table of Active or expired contracts with values, types, and renewal status.
-6. Support_Ticket: Table of Customer support issues linked to contracts with resolution times and satisfaction scores.
-7. Product: Table of Metadata on all products and pricing details, including discounts and launch status.
+1. account: Table of Company-level metadata including industry, region, lifecycle stage, account score, and contact details.
+2. activity: Table of Sales and marketing engagement logs (type, outcome, score, action items).
+3. pipeline: Table of Deal progress with stages, close probability, deal size, and expected close dates.
+4. opportunity: Table of Product-linked opportunities with status, revenue, and creation/close dates.
+5. contract: Table of Active or expired contracts with values, types, and renewal status.
+6. support_ticket: Table of Customer support issues linked to contracts with resolution times and satisfaction scores.
+7. product: Table of Metadata on all products and pricing details, including discounts and launch status.
 
 WORKFLOW:
 1. Use sql_query_tool to execute SQL queries directly

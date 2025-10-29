@@ -1,8 +1,11 @@
 import os
-from dotenv import load_dotenv
-from huggingface_hub import login
-load_dotenv()
-login(token=os.getenv("HUGGINGFACEHUB_API_TOKEN"))
+# from dotenv import load_dotenv
+
+# Load environment files with precedence: .env.local > .env.dev
+# load_dotenv('.env.dev')  # Load dev first
+# load_dotenv('.env.local')  # Local overrides dev
+# from huggingface_hub import login
+# login(token=os.getenv("HUGGINGFACEHUB_API_TOKEN"))
 
 
 from fastapi import FastAPI
@@ -39,17 +42,22 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
     session_id: str
+    files: Optional[list] = []
+
+class SessionData(BaseModel):
+    messages: list
+    last_activity: datetime
 
 # def cleanup_expired_sessions():
 #     cutoff = datetime.now() - timedelta(minutes=4)
 #     expired = [sid for sid, data in sessions.items() if data['last_activity'] < cutoff]
 #     for sid in expired:
 #         del sessions[sid]
-@api.get("/sessions")
+@api.get("/sessions", response_model=Dict[str, SessionData])
 def get_sessions():
     return sessions
 
-@api.post("/chat")
+@api.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
     # Log incoming request
     server_logger.info(f"Received chat request: {request.query}")
@@ -95,11 +103,11 @@ def chat(request: ChatRequest):
             
             server_logger.info(f"Generated response for session {session_id}: {content[:100]}...")
             
-            if response["files"] != None:
-                server_logger.info(f"Response includes files: {response['files']}")
-                return {"response": content, "session_id": session_id, "files": response["files"]}
+            files = response.get("files", [])
+            if files:
+                server_logger.info(f"Response includes files: {files}")
             
-            return {"response": content, "session_id": session_id}
+            return {"response": content, "session_id": session_id, "files": files}
         else:
             server_logger.warning(f"Improper response from model for session: {session_id}")
             return {"response": "Improper response from model", "session_id": session_id}
@@ -128,6 +136,13 @@ def chat(request: ChatRequest):
     
     # return StreamingResponse(generate_stream(), media_type="text/plain")
 
+def start_server():
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    workers = int(os.getenv("WORKERS", "1"))
+    
+    server_logger.info(f"Starting Sales Copilot server on {host}:{port}")
+    uvicorn.run(api, host=host, port=port, workers=workers)
+
 if __name__ == "__main__":
-    server_logger.info("Starting C360 server on port 8000")
-    uvicorn.run(api, host="0.0.0.0", port=8000, workers=1)
+    start_server()

@@ -3,24 +3,26 @@ from utils.globals import CHAT_MODEL, FALLBACK_MODEL
 from utils.agentutils import create_agent
 from langchain.tools import tool
 from typing import Dict, List, Optional
+from urllib.parse import quote_plus
 import os
 from langchain_postgres.vectorstores import PGVector
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 # Global instances
-# connection_string = f"postgresql://{os.getenv('PG_USER', 'postgres')}:{os.getenv('PG_PASSWORD', 'password')}@{os.getenv('PG_HOST', 'localhost')}:{os.getenv('PG_PORT', 5432)}/{os.getenv('PG_DATABASE', 'c360')}"
-connection_string = "postgresql+psycopg2://postgres:YourStrong!Passw0rd@postgres:5432/C360"
+db_host = os.getenv('DB_HOST', 'host.docker.internal')
+db_port = os.getenv('DB_PORT', '5432')
+db_user = os.getenv('DB_USER')
+db_password = quote_plus(os.getenv('DB_PASSWORD'))
+db_name = os.getenv('DB_NAME', 'sales_copilot')
 
-embeddings = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-large-en-v1.5",
-    model_kwargs={'device': 'cpu'},
-    encode_kwargs={'normalize_embeddings': True}
-)
+connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+
+embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 vector_store = PGVector(
     connection=connection_string,
     embeddings=embeddings,
-    collection_name="c360"
+    collection_name="sales_copilot"
 )
 
 @tool
@@ -119,11 +121,10 @@ def businessagent_node(state: AgentState):
 			(Always call tools via controller. Never raw SQL.)
  
 			## Workflow
-			1. Parse intent/entities (structured JSON).
-			2. Do RAG with Docs.search (topK=8).
-			3. Fetch live metrics/tools as needed.
-			4. Synthesize: merge RAG + data into insights, risks, actions.
-			5. Output:
+			1. Parse intent/entities (structured JSON)..
+			2. Fetch live metrics/tools as needed.
+			3. Synthesize: merge RAG + data into insights, risks, actions.
+			4. Output:
 			   - Exec-ready answer (markdown, bullets/tables).
 			   - JSON object (schema below).
  
@@ -174,6 +175,8 @@ def businessagent_node(state: AgentState):
 			- No invented facts.
 			- Use bullets/tables for clarity.
 			- Flag missing data.
+            
+            For any type of query you need to make up the data in above format without further queries or leaving things empty.
 			"""
 
     tools = [docs_search, get_account]

@@ -1,13 +1,26 @@
-from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_postgres import PGVector
+from langchain_google_genai.embeddings import GoogleGenerativeAIEmbeddings
 from langchain_community.retrievers import BM25Retriever
+import os
+from urllib.parse import quote_plus
 
 
-chroma_vectorstore = Chroma(
-    persist_directory="chroma_index_dir"
+# Connection string from environment variables
+db_host = os.getenv('DB_HOST', 'localhost')
+db_port = os.getenv('DB_PORT', '5432')
+db_user = os.getenv('DB_USER', 'postgres')
+db_password = os.getenv('DB_PASSWORD', 'YourStrong!Passw0rd')
+db_name = os.getenv('DB_NAME', 'sales_copilot')
+
+connection_string = f"postgresql+psycopg://{db_user}:{quote_plus(db_password)}@{db_host}:{db_port}/{db_name}"
+
+pg_vectorstore = PGVector(
+    embeddings=GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001"),
+    collection_name="sales_copilot",
+    connection=connection_string
 )
 
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
 
 def retrieve_documents(query: str, k: int = 5):
@@ -20,7 +33,7 @@ def retrieve_documents(query: str, k: int = 5):
         List of documents.
     """
     embedded_query = embeddings.embed_query(query)
-    doc_scores = chroma_vectorstore.similarity_search_by_vector_with_relevance_scores(embedded_query, k)
+    doc_scores = pg_vectorstore.similarity_search_with_score_by_vector(embedded_query, k)
     if not doc_scores:
         return []
 
