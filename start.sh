@@ -6,8 +6,8 @@ source .env.dev
 set +a
 
 # Start Streamlit in background
-streamlit run streamlit_app.py --server.port=8051 --server.address=0.0.0.0 &
-STREAMLIT_PID=$!
+# streamlit run streamlit_app.py --server.port=8051 --server.address=0.0.0.0 &
+# STREAMLIT_PID=$!
 
 # Start FastAPI application
 python app.py &
