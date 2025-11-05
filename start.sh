@@ -10,7 +10,7 @@ set +a
 # STREAMLIT_PID=$!
 
 # Start FastAPI application
-python app.py &
+python salescopilot_dev.py &
 API_PID=$!
 
 # Wait for both processes

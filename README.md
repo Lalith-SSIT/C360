@@ -28,7 +28,7 @@ pip install -r requirements.txt
 4. Run the application:
 ```bash
 # Console application
-python app.py
+python salescopilot_dev.py
 
 # Streamlit web interface
 streamlit run streamlit_app.py
