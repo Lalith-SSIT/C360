@@ -173,8 +173,9 @@ def start_server():
     port = int(os.getenv("PORT", "8000"))
     workers = int(os.getenv("WORKERS", "1"))
     
-    server_logger.info(f"Starting Sales Copilot server on {host}:{port}")
-    uvicorn.run(api, host=host, port=port, workers=workers)
+    server_logger.info(f"Starting Sales Copilot server on {host}:{port} with {workers} workers")
+    uvicorn.run("app:api", host=host, port=port, workers=workers)
+
 
 if __name__ == "__main__":
     start_server()

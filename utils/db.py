@@ -10,6 +10,8 @@ load_dotenv('.env.dev')
 
 logger = logging.getLogger(__name__)
 
+from sqlalchemy.pool import NullPool
+
 def get_connection_string(use_psycopg3=False):
     db_host = os.getenv('DB_HOST', 'localhost')
     db_port = os.getenv('DB_PORT', '5432')
@@ -20,25 +22,27 @@ def get_connection_string(use_psycopg3=False):
     driver = "psycopg" if use_psycopg3 else "psycopg2"
     return f"postgresql+{driver}://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 
-# Shared engine with optimized pooling
+# Shared engine with micro-pooling to balance efficiency and connection limits
 _engine = None
 
 def get_engine():
     global _engine
     if _engine is None:
         conn_str = get_connection_string(use_psycopg3=False)
+        # pool_size=2 per worker. With 10 workers, this uses 20 connections max.
+        # max_overflow=0 ensures we never exceed the limit.
         _engine = create_engine(
             conn_str,
-            pool_size=5,            # Reduce pool size since multiple workers/modules exist
-            max_overflow=10,
-            pool_timeout=30,
-            pool_recycle=1800,      # Recycle connections every 30 mins
-            pool_pre_ping=True      # Check if connection is alive before using
+            pool_size=2,
+            max_overflow=0,
+            pool_timeout=20,
+            pool_recycle=2000,
+            pool_pre_ping=True
         )
-        logger.info("Database engine initialized")
+        logger.info("Database engine initialized with micro-pool (size=2)")
     return _engine
 
-# For things that specifically need psycopg3 (like langchain-postgres might prefer it)
+# For things that specifically need psycopg3
 _engine_v3 = None
 def get_engine_v3():
     global _engine_v3
@@ -47,14 +51,13 @@ def get_engine_v3():
         try:
             _engine_v3 = create_engine(
                 conn_str,
-                pool_size=5,
-                max_overflow=10,
-                pool_timeout=30,
-                pool_recycle=1800,
+                pool_size=2,
+                max_overflow=0,
+                pool_timeout=20,
+                pool_recycle=2000,
                 pool_pre_ping=True
             )
         except Exception:
-            # Fallback to v2 if v3 driver not available
             logger.warning("Psycopg v3 driver not found, using v2 for all connections")
             _engine_v3 = get_engine()
     return _engine_v3
