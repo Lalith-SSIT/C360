@@ -95,17 +95,29 @@ async def chat(request: ChatRequest):
         
         # Run synchronous invoke in a thread pool with a timeout
         try:
+            # Initialize full state for the graph
+            initial_state = {
+                "messages": session['messages'][-5:],
+                "next": "Supervisor",
+                "current": "Supervisor",
+                "counter": 0,
+                "files": []
+            }
+            
             response = await asyncio.wait_for(
                 asyncio.to_thread(
                     graph_app.invoke,
-                    {"messages": session['messages'][-5:]},
-                    {"recursion_limit": 50},  # Reduced from 150 to 100 for safety
+                    initial_state,
+                    {"recursion_limit": 100}, # 100 is safer for multi-agent loops
                 ),
-                timeout=300.0  # 300 second (5 min) timeout for the entire graph execution
+                timeout=300.0  # 300 second timeout
             )
         except asyncio.TimeoutError:
             server_logger.error(f"Graph execution timed out for session {session_id}")
             return {"response": "The request timed out. Please try a simpler question or try again later.", "session_id": session_id}
+        except Exception as graph_err:
+            server_logger.error(f"Graph invocation failed: {str(graph_err)}")
+            raise graph_err
         
         if response and "messages" in response and response["messages"] and hasattr(response["messages"][-1], 'content'):
             content = response["messages"][-1].content

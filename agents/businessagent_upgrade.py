@@ -25,63 +25,63 @@ vector_store = PGVector(
     collection_name="sales_copilot"
 )
 
-@tool
-def docs_search(query: str, topK: int = 8, filters: Optional[Dict] = None) -> List[Dict]:
-    """Search BRDs, playbooks, QBR decks, notes, briefs using vector similarity"""
-    search_kwargs = {"k": topK}
-    if filters:
-        search_kwargs["filter"] = filters
+# @tool
+# def docs_search(query: str, topK: int = 8, filters: Optional[Dict] = None) -> List[Dict]:
+#     """Search BRDs, playbooks, QBR decks, notes, briefs using vector similarity"""
+#     search_kwargs = {"k": topK}
+#     if filters:
+#         search_kwargs["filter"] = filters
     
-    results = vector_store.similarity_search(query, **search_kwargs)
+#     results = vector_store.similarity_search(query, **search_kwargs)
     
-    return [{
-        'id': doc.metadata.get('id', ''),
-        'content': doc.page_content,
-        'type': doc.metadata.get('type', 'document'),
-        'metadata': doc.metadata
-    } for doc in results]
+#     return [{
+#         'id': doc.metadata.get('id', ''),
+#         'content': doc.page_content,
+#         'type': doc.metadata.get('type', 'document'),
+#         'metadata': doc.metadata
+#     } for doc in results]
 
-@tool
-def get_account(accountId: str) -> Dict:
-    """Get account health, CSAT, revenue trend, renewals, tickets using vector search"""
-    query = f"account {accountId} health CSAT revenue renewal tickets"
+# @tool
+# def get_account(accountId: str) -> Dict:
+#     """Get account health, CSAT, revenue trend, renewals, tickets using vector search"""
+#     query = f"account {accountId} health CSAT revenue renewal tickets"
     
-    results = vector_store.similarity_search(
-        query, 
-        k=5, 
-        filter={"source": "Account.json", "account_id": accountId}
-    )
+#     results = vector_store.similarity_search(
+#         query, 
+#         k=5, 
+#         filter={"source": "Account.json", "account_id": accountId}
+#     )
     
-    if not results:
-        return {'error': 'Account not found'}
+#     if not results:
+#         return {'error': 'Account not found'}
     
-    # Parse account data from vector search results
-    account_data = {}
-    for doc in results:
-        content = doc.page_content
-        metadata = doc.metadata
+#     # Parse account data from vector search results
+#     account_data = {}
+#     for doc in results:
+#         content = doc.page_content
+#         metadata = doc.metadata
         
-        if "health" in content.lower():
-            account_data["health"] = metadata.get("health_score", 0.0)
-        if "csat" in content.lower():
-            account_data["csat"] = metadata.get("csat_score", 0.0)
-        if "revenue" in content.lower():
-            account_data["revenue_trend"] = metadata.get("revenue_trend", "unknown")
-        if "renewal" in content.lower():
-            account_data["renewals"] = {
-                "date": metadata.get("renewal_date"),
-                "risk": metadata.get("renewal_risk", "unknown")
-            }
-        if "ticket" in content.lower():
-            account_data["tickets"] = {"count": metadata.get("ticket_count", 0)}
+#         if "health" in content.lower():
+#             account_data["health"] = metadata.get("health_score", 0.0)
+#         if "csat" in content.lower():
+#             account_data["csat"] = metadata.get("csat_score", 0.0)
+#         if "revenue" in content.lower():
+#             account_data["revenue_trend"] = metadata.get("revenue_trend", "unknown")
+#         if "renewal" in content.lower():
+#             account_data["renewals"] = {
+#                 "date": metadata.get("renewal_date"),
+#                 "risk": metadata.get("renewal_risk", "unknown")
+#             }
+#         if "ticket" in content.lower():
+#             account_data["tickets"] = {"count": metadata.get("ticket_count", 0)}
     
-    return {
-        "id": accountId,
-        "name": results[0].metadata.get("account_name", "Unknown"),
-        **account_data
-    }
+#     return {
+#         "id": accountId,
+#         "name": results[0].metadata.get("account_name", "Unknown"),
+#         **account_data
+#     }
 
-tools = [docs_search, get_account]
+# tools = [docs_search, get_account]
 
 def businessagent_node(state: AgentState):
     """
@@ -108,23 +108,10 @@ def businessagent_node(state: AgentState):
 			- Comms: customer emails and meeting notes from CRM context.
 			- Forecasts: commit/best case with rationale tied to notes + opp data.
  
-			## Tools (Controller-Invoked Services)
-			- Docs.search(query, topK, filters) → BRDs, playbooks, QBR decks, notes, briefs.
-			- CRM.getAccount(accountId) → health, csat, revenue trend, renewals, tickets.
-			- CRM.findAccounts(filters) → accounts by region/segment/product/risk.
-			- CRM.getOpportunities(accountId, stage, limit) → opportunities.
-			- Metrics.whitespace(accountId) → missing products & upsell TCV.
-			- Metrics.churnTopN(limit) → top churn risks.
-			- Notes.search(accountId, query, topK) → notes.
-			- Calendar.nextMeetings(accountId, withinDays) → meetings.
- 
-			(Always call tools via controller. Never raw SQL.)
  
 			## Workflow
-			1. Parse intent/entities (structured JSON)..
-			2. Fetch live metrics/tools as needed.
-			3. Synthesize: merge RAG + data into insights, risks, actions.
-			4. Output:
+			1. Parse intent/entities (structured JSON).
+			2. Output:
 			   - Exec-ready answer (markdown, bullets/tables).
 			   - JSON object (schema below).
  
@@ -157,7 +144,7 @@ def businessagent_node(state: AgentState):
 			- Recommended Actions (owner, due date, impact)
 			- Opportunities/Upsell
 			- Assumptions & Gaps
-			- Sources (Docs + Tools)
+			- Sources
  
 			### B) Machine JSON
 			{
@@ -179,13 +166,13 @@ def businessagent_node(state: AgentState):
             For any type of query you need to make up the data in above format without further queries or leaving things empty.
 			"""
 
-    tools = [docs_search, get_account]
+    # tools = [docs_search, get_account]
     
     try:
-        model = create_agent(CHAT_MODEL, system_message=system_prompt, tools=tools)
+        model = create_agent(CHAT_MODEL, system_message=system_prompt)
         response = model.invoke(state["messages"])
         return {"messages": [response]}
     except Exception:
-        model = create_agent(FALLBACK_MODEL, system_message=system_prompt, tools=tools)
+        model = create_agent(FALLBACK_MODEL, system_message=system_prompt)
         response = model.invoke(state["messages"])
         return {"messages": [response]}

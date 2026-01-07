@@ -79,7 +79,7 @@ with st.container(gap="small", horizontal_alignment="right", vertical_alignment=
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 try:
-                    raw_response = requests.post(f"http://{os.getenv('HOST', 'localhost')}:{os.getenv('PORT', '8000')}/chat", json={"query": user_query, "session_id": st.session_state.get("session_id", "")})
+                    raw_response = requests.post(f"http://{os.getenv('HOST', 'localhost')}:{os.getenv('PORT', '8000')}/chat", json={"query": user_query, "session_id": st.session_state.get("session_id", "")}, timeout=300)
                     raw_response.raise_for_status()  # Raise an exception for bad status codes
                     response_data = raw_response.json()
                 except requests.exceptions.JSONDecodeError:

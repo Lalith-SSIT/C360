@@ -1,9 +1,12 @@
 from utils.statehandler import AgentState
 # from langgraph.types import Command
 from utils.globals import CHAT_MODEL, FALLBACK_MODEL
-from utils.globals import FALLBACK_MODEL
 from utils.agentutils import create_agent
-# from utils.retriever import retrieve_documents
+from utils.logger import get_c360_logger
+import logging
+
+# Initialize logger
+supervisor_logger = get_c360_logger('supervisor', level=logging.INFO, console=True)
 
 
 def supervisor_node(state: AgentState):
@@ -19,7 +22,12 @@ def supervisor_node(state: AgentState):
     #         return {"next": "Analysis Agent"}
 
     # Get the latest message
-    latest_message = state["messages"][-1].content
+    if not state["messages"]:
+        supervisor_logger.warning("No messages in state, defaulting to Business Agent")
+        return {"next": "Business Agent"}
+        
+    latest_message = state["messages"][-1].content if hasattr(state["messages"][-1], 'content') else str(state["messages"][-1])
+    supervisor_logger.info(f"Supervisor processing message: {latest_message[:50]}...")
 
     # Prompt the LLM to decide the next agent with explicit rules and examples
     system_prompt = """You are a supervisor agent that routes conversations based on context and task completion status.
@@ -88,6 +96,8 @@ Reason: [Why this agent should handle next step]"""
     elif "business_agent" in agent_line:
         next_agent = "Business Agent"
     else:
+        supervisor_logger.warning(f"Unexpected agent decision '{agent_line}', falling back to Business Agent")
         next_agent = "Business Agent"  # Default fallback
     
+    supervisor_logger.info(f"Supervisor decided to route to: {next_agent}")
     return {"next": next_agent}

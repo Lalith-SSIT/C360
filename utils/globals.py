@@ -26,7 +26,7 @@ provider = config['models']['provider']
 
 
 TODAY = datetime.now()
-RATE_LIMITER = rate_limiters.InMemoryRateLimiter(requests_per_second=2.0)
+RATE_LIMITER = rate_limiters.InMemoryRateLimiter(requests_per_second=300.0)
 
 CODE_MODEL = ChatOllama(
     model="gemma3:12b",
