@@ -20,7 +20,7 @@ rough.py
 env/
 venv/
 .venv/
-outputs/
+*outputs/
 
 # IDE
 .vscode/
