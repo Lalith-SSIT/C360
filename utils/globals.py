@@ -5,6 +5,11 @@ from langchain_openai import ChatOpenAI
 from datetime import datetime
 import configparser
 import os
+from dotenv import load_dotenv
+
+# Ensure environment variables are loaded
+load_dotenv('.env.local')
+load_dotenv('.env.dev')
 
 # Load config and initialize models
 config = configparser.ConfigParser()
@@ -29,13 +34,17 @@ CODE_MODEL = ChatOllama(
     max_tokens=2048,
     top_p=0.4,
     top_k=2,
-    timeout=60
+    timeout=300
 )
 
 
 try:
     if provider == "openai":
-        CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'], timeout=60)
+        api_key = os.getenv('OPENAI_API_KEY')
+        if not api_key:
+            print("Warning: OPENAI_API_KEY not found. Falling back to Ollama.")
+            raise ValueError("Missing OpenAI API key")
+        CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'], api_key=api_key, timeout=300)
     elif provider == "gemini":
         api_key = os.getenv('GOOGLE_API_KEY')
         if not api_key:
@@ -48,7 +57,7 @@ try:
             top_p=0.9, top_k=40,
             rate_limiter=RATE_LIMITER,
             google_api_key=api_key,
-            timeout=60
+            timeout=300
         )
     else:
         api_key = os.getenv('GOOGLE_API_KEY')
@@ -56,7 +65,7 @@ try:
             print("Warning: GOOGLE_API_KEY not found. Falling back to Ollama.")
             raise ValueError("Missing API key")
         CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
-            temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40, rate_limiter=RATE_LIMITER, google_api_key=api_key, timeout=60)
+            temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40, rate_limiter=RATE_LIMITER, google_api_key=api_key, timeout=300)
 except Exception as e:
     print(f"Failed to initialize {provider} model: {e}. Using Ollama fallback.")
     CHAT_MODEL = ChatOllama(
@@ -65,8 +74,8 @@ except Exception as e:
         max_tokens=2048,
         top_p=0.9,
         top_k=40,
-        timeout=60
+        timeout=300
     )
 
 # Fallback model for all agents
-FALLBACK_MODEL = ChatOllama(model="llama3.1:latest", temperature=0.1, timeout=60)
+FALLBACK_MODEL = ChatOllama(model="llama3.1:latest", temperature=0.1, timeout=300)

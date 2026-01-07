@@ -101,7 +101,7 @@ async def chat(request: ChatRequest):
                     {"messages": session['messages'][-5:]},
                     {"recursion_limit": 50},  # Reduced from 150 to 100 for safety
                 ),
-                timeout=90.0  # 90 second timeout for the entire graph execution
+                timeout=300.0  # 300 second (5 min) timeout for the entire graph execution
             )
         except asyncio.TimeoutError:
             server_logger.error(f"Graph execution timed out for session {session_id}")
