@@ -1,0 +1,702 @@
+{
+  "PROD-0001": {
+    "Product_Name": "Incentivize Efficient Schemas",
+    "Product_Category": "Software",
+    "Unit_Price": "9352.37",
+    "Launch_Date": "2022-04-23 05:51:23",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0002": {
+    "Product_Name": "Enhance Seamless Technologies",
+    "Product_Category": "Consulting",
+    "Unit_Price": "414.18",
+    "Launch_Date": "2022-10-05 06:35:03",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0003": {
+    "Product_Name": "Architect Holistic Vortals",
+    "Product_Category": "Hardware",
+    "Unit_Price": "7712.82",
+    "Launch_Date": "2024-06-27 14:20:26",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0004": {
+    "Product_Name": "Seize Efficient Technologies",
+    "Product_Category": "Services",
+    "Unit_Price": "9929.28",
+    "Launch_Date": "2023-07-13 22:05:49",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0005": {
+    "Product_Name": "Maximize Enterprise Interfaces",
+    "Product_Category": "Consulting",
+    "Unit_Price": "8709.24",
+    "Launch_Date": "2022-01-03 21:31:29",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0006": {
+    "Product_Name": "Seize B2B Technologies",
+    "Product_Category": "Consulting",
+    "Unit_Price": "894.47",
+    "Launch_Date": "2024-12-20 21:03:07",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0007": {
+    "Product_Name": "Envisioneer Strategic Convergence",
+    "Product_Category": "Support",
+    "Unit_Price": "8616.84",
+    "Launch_Date": "2021-09-01 22:04:52",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0008": {
+    "Product_Name": "Grow Dot-Com Info-Mediaries",
+    "Product_Category": "Hardware",
+    "Unit_Price": "9929.18",
+    "Launch_Date": "2025-06-02 23:18:17",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0009": {
+    "Product_Name": "Aggregate Real-Time Schemas",
+    "Product_Category": "Training",
+    "Unit_Price": "1360.74",
+    "Launch_Date": "2022-05-26 23:44:07",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0010": {
+    "Product_Name": "Empower Global Platforms",
+    "Product_Category": "Software",
+    "Unit_Price": "7586.18",
+    "Launch_Date": "2024-06-14 00:52:34",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0011": {
+    "Product_Name": "Extend Web-Enabled Action-Items",
+    "Product_Category": "Consulting",
+    "Unit_Price": "6767.65",
+    "Launch_Date": "2024-02-09 23:49:56",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0012": {
+    "Product_Name": "Repurpose Magnetic Functionalities",
+    "Product_Category": "Training",
+    "Unit_Price": "3854.84",
+    "Launch_Date": "2021-09-15 10:24:04",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0013": {
+    "Product_Name": "Streamline Mission-Critical E-Markets",
+    "Product_Category": "Hardware",
+    "Unit_Price": "4660.19",
+    "Launch_Date": "2022-06-25 06:30:18",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0014": {
+    "Product_Name": "Unleash Collaborative Platforms",
+    "Product_Category": "Services",
+    "Unit_Price": "1965.96",
+    "Launch_Date": "2022-11-23 15:58:03",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0015": {
+    "Product_Name": "Revolutionize Global Synergies",
+    "Product_Category": "Software",
+    "Unit_Price": "8113.83",
+    "Launch_Date": "2024-05-21 18:24:24",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0016": {
+    "Product_Name": "Re-Contextualize Granular E-Markets",
+    "Product_Category": "Training",
+    "Unit_Price": "7683.93",
+    "Launch_Date": "2023-10-31 12:21:34",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0017": {
+    "Product_Name": "Re-Contextualize Collaborative Info-Mediaries",
+    "Product_Category": "Hardware",
+    "Unit_Price": "2140.21",
+    "Launch_Date": "2024-04-07 19:20:11",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0018": {
+    "Product_Name": "Aggregate Front-End Vortals",
+    "Product_Category": "Training",
+    "Unit_Price": "432.41",
+    "Launch_Date": "2024-04-04 03:34:09",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0019": {
+    "Product_Name": "Visualize Leading-Edge Infrastructures",
+    "Product_Category": "Hardware",
+    "Unit_Price": "7431.36",
+    "Launch_Date": "2022-09-14 22:47:02",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0020": {
+    "Product_Name": "Maximize Bleeding-Edge Users",
+    "Product_Category": "Consulting",
+    "Unit_Price": "2419.96",
+    "Launch_Date": "2024-04-06 21:11:17",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0021": {
+    "Product_Name": "Drive Robust Roi",
+    "Product_Category": "Software",
+    "Unit_Price": "1487.34",
+    "Launch_Date": "2024-08-19 01:57:30",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0022": {
+    "Product_Name": "Matrix Virtual Paradigms",
+    "Product_Category": "Hardware",
+    "Unit_Price": "8176.28",
+    "Launch_Date": "2023-04-08 17:36:36",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0023": {
+    "Product_Name": "Strategize Rich Roi",
+    "Product_Category": "Training",
+    "Unit_Price": "6019.38",
+    "Launch_Date": "2025-01-17 13:38:37",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0024": {
+    "Product_Name": "Extend Distributed Paradigms",
+    "Product_Category": "Hardware",
+    "Unit_Price": "3087.47",
+    "Launch_Date": "2025-06-22 13:02:01",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0025": {
+    "Product_Name": "Monetize Sticky Supply-Chains",
+    "Product_Category": "Support",
+    "Unit_Price": "5260.39",
+    "Launch_Date": "2021-07-12 23:14:02",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0026": {
+    "Product_Name": "Target Rich Channels",
+    "Product_Category": "Services",
+    "Unit_Price": "2824.02",
+    "Launch_Date": "2022-09-13 14:57:22",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0027": {
+    "Product_Name": "Deliver Plug-And-Play Niches",
+    "Product_Category": "Support",
+    "Unit_Price": "6819.63",
+    "Launch_Date": "2025-02-09 15:32:08",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0028": {
+    "Product_Name": "Exploit One-To-One Supply-Chains",
+    "Product_Category": "Software",
+    "Unit_Price": "9725.67",
+    "Launch_Date": "2022-04-24 02:15:31",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0029": {
+    "Product_Name": "Drive Ubiquitous Experiences",
+    "Product_Category": "Training",
+    "Unit_Price": "3255.47",
+    "Launch_Date": "2022-03-07 23:57:14",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0030": {
+    "Product_Name": "Unleash Viral Synergies",
+    "Product_Category": "Consulting",
+    "Unit_Price": "1577.25",
+    "Launch_Date": "2022-08-02 05:15:31",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0031": {
+    "Product_Name": "Facilitate Distributed Networks",
+    "Product_Category": "Hardware",
+    "Unit_Price": "7568.72",
+    "Launch_Date": "2024-08-15 20:50:04",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0032": {
+    "Product_Name": "Engineer Dynamic Roi",
+    "Product_Category": "Hardware",
+    "Unit_Price": "8508.48",
+    "Launch_Date": "2024-05-11 05:13:32",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0033": {
+    "Product_Name": "Iterate Wireless E-Commerce",
+    "Product_Category": "Support",
+    "Unit_Price": "1529.08",
+    "Launch_Date": "2024-02-02 15:45:48",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0034": {
+    "Product_Name": "Harness E-Business Interfaces",
+    "Product_Category": "Software",
+    "Unit_Price": "5667.62",
+    "Launch_Date": "2023-09-07 00:47:03",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0035": {
+    "Product_Name": "Transform Viral Channels",
+    "Product_Category": "Training",
+    "Unit_Price": "5346.92",
+    "Launch_Date": "2024-05-03 05:23:44",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0036": {
+    "Product_Name": "Harness Interactive Synergies",
+    "Product_Category": "Hardware",
+    "Unit_Price": "2624.46",
+    "Launch_Date": "2023-07-10 06:30:28",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0037": {
+    "Product_Name": "Synergize Web-Enabled Systems",
+    "Product_Category": "Support",
+    "Unit_Price": "882.8",
+    "Launch_Date": "2022-08-07 16:30:31",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0038": {
+    "Product_Name": "Empower Open-Source Content",
+    "Product_Category": "Services",
+    "Unit_Price": "1015.39",
+    "Launch_Date": "2024-09-11 11:48:49",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0039": {
+    "Product_Name": "Drive Value-Added Portals",
+    "Product_Category": "Software",
+    "Unit_Price": "2757.77",
+    "Launch_Date": "2023-12-20 09:26:22",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0040": {
+    "Product_Name": "Disintermediate Web-Enabled Markets",
+    "Product_Category": "Software",
+    "Unit_Price": "1962.82",
+    "Launch_Date": "2024-04-09 00:48:40",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0041": {
+    "Product_Name": "Embrace Plug-And-Play Content",
+    "Product_Category": "Consulting",
+    "Unit_Price": "2168",
+    "Launch_Date": "2024-04-30 22:35:59",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0042": {
+    "Product_Name": "Strategize Extensible Initiatives",
+    "Product_Category": "Services",
+    "Unit_Price": "9574.5",
+    "Launch_Date": "2022-03-03 16:24:13",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0043": {
+    "Product_Name": "Redefine Distributed Relationships",
+    "Product_Category": "Hardware",
+    "Unit_Price": "9377.88",
+    "Launch_Date": "2024-03-16 18:36:46",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0044": {
+    "Product_Name": "Enhance Magnetic Channels",
+    "Product_Category": "Support",
+    "Unit_Price": "9995.76",
+    "Launch_Date": "2024-02-08 08:37:35",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0045": {
+    "Product_Name": "Orchestrate Ubiquitous Metrics",
+    "Product_Category": "Hardware",
+    "Unit_Price": "6986.7",
+    "Launch_Date": "2023-07-11 09:38:32",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0046": {
+    "Product_Name": "Deploy Collaborative Users",
+    "Product_Category": "Consulting",
+    "Unit_Price": "9159.75",
+    "Launch_Date": "2023-01-29 23:28:21",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0047": {
+    "Product_Name": "Repurpose Killer Action-Items",
+    "Product_Category": "Services",
+    "Unit_Price": "3868.55",
+    "Launch_Date": "2024-11-25 10:16:09",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0048": {
+    "Product_Name": "Engineer Strategic Deliverables",
+    "Product_Category": "Services",
+    "Unit_Price": "2689.46",
+    "Launch_Date": "2024-05-20 10:42:50",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0049": {
+    "Product_Name": "Mesh Bricks-And-Clicks Partnerships",
+    "Product_Category": "Consulting",
+    "Unit_Price": "1076.22",
+    "Launch_Date": "2023-05-23 13:42:02",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0050": {
+    "Product_Name": "Maximize One-To-One Markets",
+    "Product_Category": "Services",
+    "Unit_Price": "9151.87",
+    "Launch_Date": "2025-05-23 11:05:24",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0051": {
+    "Product_Name": "Engage 24/365 Networks",
+    "Product_Category": "Services",
+    "Unit_Price": "4197.91",
+    "Launch_Date": "2025-01-06 00:39:54",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0052": {
+    "Product_Name": "Orchestrate Frictionless Vortals",
+    "Product_Category": "Support",
+    "Unit_Price": "1544.63",
+    "Launch_Date": "2023-10-10 05:52:11",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0053": {
+    "Product_Name": "Mesh Visionary Initiatives",
+    "Product_Category": "Training",
+    "Unit_Price": "9354.11",
+    "Launch_Date": "2025-02-14 23:16:34",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0054": {
+    "Product_Name": "Architect Holistic Infrastructures",
+    "Product_Category": "Services",
+    "Unit_Price": "1608.87",
+    "Launch_Date": "2024-05-20 08:58:25",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0055": {
+    "Product_Name": "Deliver Customized Markets",
+    "Product_Category": "Hardware",
+    "Unit_Price": "3860.41",
+    "Launch_Date": "2025-04-24 22:45:10",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0056": {
+    "Product_Name": "Enable Next-Generation Bandwidth",
+    "Product_Category": "Consulting",
+    "Unit_Price": "5551.36",
+    "Launch_Date": "2023-06-02 22:54:37",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0057": {
+    "Product_Name": "Streamline Plug-And-Play Methodologies",
+    "Product_Category": "Services",
+    "Unit_Price": "7657.27",
+    "Launch_Date": "2023-11-21 13:51:42",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0058": {
+    "Product_Name": "Monetize Vertical Interfaces",
+    "Product_Category": "Support",
+    "Unit_Price": "6452.78",
+    "Launch_Date": "2024-12-03 01:42:49",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0059": {
+    "Product_Name": "Transition Clicks-And-Mortar E-Tailers",
+    "Product_Category": "Consulting",
+    "Unit_Price": "1765.51",
+    "Launch_Date": "2022-07-28 20:34:53",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0060": {
+    "Product_Name": "Optimize Revolutionary E-Commerce",
+    "Product_Category": "Hardware",
+    "Unit_Price": "1485.59",
+    "Launch_Date": "2023-12-13 22:44:08",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0061": {
+    "Product_Name": "Scale Innovative Users",
+    "Product_Category": "Hardware",
+    "Unit_Price": "9177.3",
+    "Launch_Date": "2022-12-15 18:41:45",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0062": {
+    "Product_Name": "Re-Contextualize Innovative Info-Mediaries",
+    "Product_Category": "Training",
+    "Unit_Price": "434.86",
+    "Launch_Date": "2021-09-30 04:13:17",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0063": {
+    "Product_Name": "Envisioneer Transparent Roi",
+    "Product_Category": "Support",
+    "Unit_Price": "580.29",
+    "Launch_Date": "2021-08-16 20:53:26",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0064": {
+    "Product_Name": "Enable Next-Generation Relationships",
+    "Product_Category": "Consulting",
+    "Unit_Price": "1461.17",
+    "Launch_Date": "2024-10-05 03:05:07",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0065": {
+    "Product_Name": "Synergize Customized Architectures",
+    "Product_Category": "Software",
+    "Unit_Price": "7100.98",
+    "Launch_Date": "2025-04-13 05:03:15",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0066": {
+    "Product_Name": "Evolve Global Experiences",
+    "Product_Category": "Hardware",
+    "Unit_Price": "5106.76",
+    "Launch_Date": "2023-02-02 02:48:34",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0067": {
+    "Product_Name": "Seize 24/7 Roi",
+    "Product_Category": "Software",
+    "Unit_Price": "6216.57",
+    "Launch_Date": "2025-02-23 23:32:14",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0068": {
+    "Product_Name": "Strategize End-To-End E-Services",
+    "Product_Category": "Support",
+    "Unit_Price": "4929.76",
+    "Launch_Date": "2023-10-11 04:10:37",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0069": {
+    "Product_Name": "Implement Vertical Content",
+    "Product_Category": "Training",
+    "Unit_Price": "5561.27",
+    "Launch_Date": "2025-01-15 10:08:04",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0070": {
+    "Product_Name": "Innovate Cutting-Edge Users",
+    "Product_Category": "Software",
+    "Unit_Price": "5341.23",
+    "Launch_Date": "2023-06-17 19:45:55",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0071": {
+    "Product_Name": "Transition Bleeding-Edge Action-Items",
+    "Product_Category": "Training",
+    "Unit_Price": "9777.05",
+    "Launch_Date": "2023-02-07 18:10:49",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0072": {
+    "Product_Name": "Seize B2C Niches",
+    "Product_Category": "Training",
+    "Unit_Price": "8150.26",
+    "Launch_Date": "2023-06-14 03:05:02",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0073": {
+    "Product_Name": "Re-Contextualize One-To-One Paradigms",
+    "Product_Category": "Hardware",
+    "Unit_Price": "1159.46",
+    "Launch_Date": "2022-04-17 08:47:21",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0074": {
+    "Product_Name": "Repurpose Next-Generation E-Business",
+    "Product_Category": "Training",
+    "Unit_Price": "1574.09",
+    "Launch_Date": "2024-12-07 01:15:46",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0075": {
+    "Product_Name": "Re-Contextualize Vertical Action-Items",
+    "Product_Category": "Training",
+    "Unit_Price": "5311.91",
+    "Launch_Date": "2024-09-30 14:16:19",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0076": {
+    "Product_Name": "Optimize Mission-Critical Metrics",
+    "Product_Category": "Services",
+    "Unit_Price": "7969.87",
+    "Launch_Date": "2022-05-14 17:00:31",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0077": {
+    "Product_Name": "Grow Scalable Action-Items",
+    "Product_Category": "Services",
+    "Unit_Price": "9597.05",
+    "Launch_Date": "2021-08-19 17:32:35",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0078": {
+    "Product_Name": "Integrate Wireless Systems",
+    "Product_Category": "Training",
+    "Unit_Price": "2507.76",
+    "Launch_Date": "2024-08-21 23:06:05",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0079": {
+    "Product_Name": "Incubate Killer Markets",
+    "Product_Category": "Services",
+    "Unit_Price": "6872.01",
+    "Launch_Date": "2022-06-27 14:31:49",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0080": {
+    "Product_Name": "Deliver Distributed E-Services",
+    "Product_Category": "Support",
+    "Unit_Price": "9917.58",
+    "Launch_Date": "2022-02-01 06:21:42",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0081": {
+    "Product_Name": "Redefine Turn-Key Networks",
+    "Product_Category": "Software",
+    "Unit_Price": "4112.26",
+    "Launch_Date": "2024-12-16 20:26:41",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0082": {
+    "Product_Name": "Revolutionize World-Class Action-Items",
+    "Product_Category": "Training",
+    "Unit_Price": "4812.45",
+    "Launch_Date": "2024-01-13 09:42:55",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0083": {
+    "Product_Name": "Matrix B2B Web Services",
+    "Product_Category": "Support",
+    "Unit_Price": "1796.7",
+    "Launch_Date": "2022-10-10 08:19:20",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0084": {
+    "Product_Name": "Enhance Transparent Content",
+    "Product_Category": "Consulting",
+    "Unit_Price": "6484.58",
+    "Launch_Date": "2023-09-16 07:22:36",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0085": {
+    "Product_Name": "Streamline Virtual Functionalities",
+    "Product_Category": "Training",
+    "Unit_Price": "9775.56",
+    "Launch_Date": "2022-08-30 00:12:38",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0086": {
+    "Product_Name": "Brand Rich Markets",
+    "Product_Category": "Training",
+    "Unit_Price": "9199.61",
+    "Launch_Date": "2024-05-17 23:22:03",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0087": {
+    "Product_Name": "Visualize Enterprise Deliverables",
+    "Product_Category": "Hardware",
+    "Unit_Price": "9022.6",
+    "Launch_Date": "2022-12-15 14:26:39",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0088": {
+    "Product_Name": "Scale Next-Generation E-Markets",
+    "Product_Category": "Services",
+    "Unit_Price": "560.96",
+    "Launch_Date": "2022-11-05 17:00:38",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0089": {
+    "Product_Name": "Monetize Enterprise Roi",
+    "Product_Category": "Support",
+    "Unit_Price": "9263.29",
+    "Launch_Date": "2022-02-15 08:57:52",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0090": {
+    "Product_Name": "Incubate Collaborative Action-Items",
+    "Product_Category": "Hardware",
+    "Unit_Price": "9294.79",
+    "Launch_Date": "2024-09-12 12:23:58",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0091": {
+    "Product_Name": "Enhance Seamless Eyeballs",
+    "Product_Category": "Software",
+    "Unit_Price": "9618.54",
+    "Launch_Date": "2025-02-06 23:27:14",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0092": {
+    "Product_Name": "Target Leading-Edge Schemas",
+    "Product_Category": "Support",
+    "Unit_Price": "8226.93",
+    "Launch_Date": "2024-12-01 07:14:29",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0093": {
+    "Product_Name": "Deploy Global Architectures",
+    "Product_Category": "Services",
+    "Unit_Price": "1708.26",
+    "Launch_Date": "2023-03-31 15:27:38",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0094": {
+    "Product_Name": "Morph Best-Of-Breed Supply-Chains",
+    "Product_Category": "Training",
+    "Unit_Price": "8363.04",
+    "Launch_Date": "2022-07-10 20:09:02",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0095": {
+    "Product_Name": "Evolve Customized Relationships",
+    "Product_Category": "Support",
+    "Unit_Price": "8975.61",
+    "Launch_Date": "2024-03-29 04:40:14",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0096": {
+    "Product_Name": "Incubate Dynamic Markets",
+    "Product_Category": "Consulting",
+    "Unit_Price": "7580.53",
+    "Launch_Date": "2021-11-19 05:02:11",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0097": {
+    "Product_Name": "Synergize Revolutionary Partnerships",
+    "Product_Category": "Support",
+    "Unit_Price": "7269.22",
+    "Launch_Date": "2022-08-19 14:42:08",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0098": {
+    "Product_Name": "Exploit Killer Info-Mediaries",
+    "Product_Category": "Software",
+    "Unit_Price": "1067.09",
+    "Launch_Date": "2022-04-16 20:57:53",
+    "Is_Active": "TRUE"
+  },
+  "PROD-0099": {
+    "Product_Name": "Cultivate Open-Source Content",
+    "Product_Category": "Software",
+    "Unit_Price": "3471.87",
+    "Launch_Date": "2022-05-19 01:40:42",
+    "Is_Active": "FALSE"
+  },
+  "PROD-0100": {
+    "Product_Name": "Implement Killer Solutions",
+    "Product_Category": "Services",
+    "Unit_Price": "393.29",
+    "Launch_Date": "2025-05-10 15:29:15",
+    "Is_Active": "TRUE"
+  }
+}
