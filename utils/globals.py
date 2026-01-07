@@ -33,7 +33,7 @@ CODE_MODEL = ChatOllama(
     temperature=0,
     max_tokens=2048,
     top_p=0.4,
-    top_k=2,
+    top_k=4,
     timeout=300
 )
 
@@ -44,7 +44,7 @@ try:
         if not api_key:
             print("Warning: OPENAI_API_KEY not found. Falling back to Ollama.")
             raise ValueError("Missing OpenAI API key")
-        CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'], api_key=api_key, timeout=300)
+        CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'], api_key=api_key, temperature=0.4, max_tokens=10000, top_p=0.9, top_k=4, timeout=300)
     elif provider == "gemini":
         api_key = os.getenv('GOOGLE_API_KEY')
         if not api_key:
@@ -52,9 +52,9 @@ try:
             raise ValueError("Missing API key")
         CHAT_MODEL = ChatGoogleGenerativeAI(
             model=config['gemini']['chat_model'],
-            temperature=0.1,
-            max_output_tokens=2048,
-            top_p=0.9, top_k=40,
+            temperature=0.4,
+            max_output_tokens=10000,
+            top_p=0.9, top_k=4,
             rate_limiter=RATE_LIMITER,
             google_api_key=api_key,
             timeout=300
@@ -64,16 +64,16 @@ try:
         if not api_key:
             print("Warning: GOOGLE_API_KEY not found. Falling back to Ollama.")
             raise ValueError("Missing API key")
-        CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
-            temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40, rate_limiter=RATE_LIMITER, google_api_key=api_key, timeout=300)
+        # CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
+        #     temperature=0.4, max_output_tokens=10000, top_p=0.9, top_k=4, rate_limiter=RATE_LIMITER, google_api_key=api_key, timeout=300)
 except Exception as e:
     print(f"Failed to initialize {provider} model: {e}. Using Ollama fallback.")
     CHAT_MODEL = ChatOllama(
         model="llama3.1:latest",
-        temperature=0.1,
-        max_tokens=2048,
+        temperature=0.4,
+        max_tokens=10000,
         top_p=0.9,
-        top_k=40,
+        top_k=4,
         timeout=300
     )
 

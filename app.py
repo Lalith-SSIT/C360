@@ -97,7 +97,7 @@ async def chat(request: ChatRequest):
         try:
             # Initialize full state for the graph
             initial_state = {
-                "messages": session['messages'][-5:],
+                "messages": session['messages'][-2:],
                 "next": "Supervisor",
                 "current": "Supervisor",
                 "counter": 0,
