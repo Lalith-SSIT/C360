@@ -2,8 +2,13 @@ import os
 from dotenv import load_dotenv
 
 # Load environment files with precedence: .env.local > .env.dev
+<<<<<<< HEAD:app.py
 # load_dotenv('.env.dev')  # Load dev first
 load_dotenv('.env.local')  # Local overrides dev
+=======
+load_dotenv('.env.dev')  # Load dev first
+# load_dotenv('.env.local')  # Local overrides dev
+>>>>>>> 109c32f165b2270dfbd92e5adce2db1c96a4507e:salescopilot_dev.py
 # from huggingface_hub import login
 # login(token=os.getenv("HUGGINGFACEHUB_API_TOKEN"))
 
