@@ -44,7 +44,7 @@ try:
         if not api_key:
             print("Warning: OPENAI_API_KEY not found. Falling back to Ollama.")
             raise ValueError("Missing OpenAI API key")
-        CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'], api_key=api_key, temperature=0.4, max_tokens=10000, top_p=0.9, top_k=4, timeout=300)
+        CHAT_MODEL = ChatOpenAI(model=config['openai']['chat_model'], api_key=api_key, temperature=0.4, max_tokens=10000, top_p=0.9, timeout=300)
     elif provider == "gemini":
         api_key = os.getenv('GOOGLE_API_KEY')
         if not api_key:

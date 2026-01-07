@@ -11,15 +11,10 @@ from langgraph.prebuilt import InjectedState
 from langchain_core.tools import tool
 from urllib.parse import quote_plus
 
-# Database connection configuration from environment variables
-db_host = os.getenv('DB_HOST')
-db_port = os.getenv('DB_PORT')
-db_user = os.getenv('DB_USER')
-db_password = quote_plus(os.getenv('DB_PASSWORD'))
-db_name = os.getenv('DB_NAME', 'sales_copilot')
+from utils.db import get_engine
+from sqlalchemy import text
 
-connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-engine = create_engine(connection_string)
+engine = get_engine()
 db = SQLDatabase(engine=engine, include_tables=["opportunity", "account", "product", "support_ticket", "pipeline", "activity", "contract"])
 
 # Module-level variable to track current session's files

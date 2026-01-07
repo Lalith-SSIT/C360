@@ -48,14 +48,17 @@ class SessionData(BaseModel):
     messages: list
     last_activity: datetime
 
-# def cleanup_expired_sessions():
-#     cutoff = datetime.now() - timedelta(minutes=4)
-#     expired = [sid for sid, data in sessions.items() if data['last_activity'] < cutoff]
-#     for sid in expired:
-#         del sessions[sid]
 @api.get("/sessions", response_model=Dict[str, SessionData])
 def get_sessions():
+    cleanup_expired_sessions()
     return sessions
+
+def cleanup_expired_sessions():
+    cutoff = datetime.now() - timedelta(minutes=30)  # Increased to 30 mins
+    expired = [sid for sid, data in sessions.items() if data['last_activity'] < cutoff]
+    for sid in expired:
+        del sessions[sid]
+        server_logger.info(f"Cleaned up expired session: {sid}")
 
 import asyncio
 
@@ -71,7 +74,8 @@ async def chat(request: ChatRequest):
         session_id = str(uuid.uuid4())
         sessions[session_id] = {
             'messages': [],
-            'last_activity': datetime.now()
+            'last_activity': datetime.now(),
+            'files': []
         }
         server_logger.info(f"Created new session: {session_id}")
     else:
@@ -95,22 +99,22 @@ async def chat(request: ChatRequest):
         
         # Run synchronous invoke in a thread pool with a timeout
         try:
-            # Initialize full state for the graph
+            # Initialize state with more history and persistent files
             initial_state = {
-                "messages": session['messages'][-2:],
+                "messages": session['messages'][-2:], # Keep more context
                 "next": "Supervisor",
                 "current": "Supervisor",
                 "counter": 0,
-                "files": []
+                "files":[] # Preserve files across turns
             }
             
             response = await asyncio.wait_for(
                 asyncio.to_thread(
                     graph_app.invoke,
                     initial_state,
-                    {"recursion_limit": 100}, # 100 is safer for multi-agent loops
+                    {"recursion_limit": 50}, # 50 is plenty, 100 might be too much
                 ),
-                timeout=300.0  # 300 second timeout
+                timeout=180.0  # Reduced to 180s to fail faster and save resources
             )
         except asyncio.TimeoutError:
             server_logger.error(f"Graph execution timed out for session {session_id}")
@@ -130,6 +134,7 @@ async def chat(request: ChatRequest):
             files = response.get("files", [])
             if files:
                 server_logger.info(f"Response includes files: {files}")
+                session['files'] = list(set(session.get('files', []) + files)) # Update persistent files
             
             return {"response": content, "session_id": session_id, "files": files}
         else:

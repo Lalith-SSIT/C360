@@ -8,19 +8,13 @@ import os
 from langchain_postgres.vectorstores import PGVector
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
-# Global instances
-db_host = os.getenv('DB_HOST', 'host.docker.internal')
-db_port = os.getenv('DB_PORT', '5432')
-db_user = os.getenv('DB_USER')
-db_password = quote_plus(os.getenv('DB_PASSWORD'))
-db_name = os.getenv('DB_NAME', 'sales_copilot')
+from utils.db import get_engine_v3
 
-connection_string = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-
+engine = get_engine_v3()
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 vector_store = PGVector(
-    connection=connection_string,
+    connection=engine,
     embeddings=embeddings,
     collection_name="sales_copilot"
 )
