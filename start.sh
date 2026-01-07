@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Load and export environment variables (Enable this if you are running outside docker)
-# set -a
-# source .env.local
-# set +a
+set -a
+source .env.local
+set +a
 
 # Start Streamlit in background
 streamlit run streamlit_app.py --server.port=8051 --server.address=0.0.0.0 &
