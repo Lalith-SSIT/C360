@@ -53,7 +53,7 @@ try:
         if not api_key:
             print("Warning: GOOGLE_API_KEY not found. Falling back to Ollama.")
             raise ValueError("Missing API key")
-        CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-1.5-flash",
+        CHAT_MODEL = ChatGoogleGenerativeAI(model="gemini-2.5-flash",
             temperature=0.1, max_output_tokens=2048, top_p=0.9, top_k=40, rate_limiter=RATE_LIMITER, google_api_key=api_key)
 except Exception as e:
     print(f"Failed to initialize {provider} model: {e}. Using Ollama fallback.")

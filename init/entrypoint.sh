@@ -2,7 +2,11 @@
 set -e
 # automatically export all variables (Enable this if you are running outside docker)
 set -a
+<<<<<<< HEAD
 source .env.dev
+=======
+source .env.local
+>>>>>>> local
 set +a  # stop auto-exporting
 
 if [ ! -f "/app/.initialized" ]; then

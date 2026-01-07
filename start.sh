@@ -2,7 +2,11 @@
 
 # Load and export environment variables (Enable this if you are running outside docker)
 set -a
+<<<<<<< HEAD
 source .env.dev
+=======
+source .env.local
+>>>>>>> local
 set +a
 
 # Start Streamlit in background
