@@ -57,8 +57,10 @@ class SessionData(BaseModel):
 def get_sessions():
     return sessions
 
+import asyncio
+
 @api.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest):
+async def chat(request: ChatRequest):
     # Log incoming request
     server_logger.info(f"Received chat request: {request.query}")
     
@@ -90,10 +92,20 @@ def chat(request: ChatRequest):
     
     try:
         server_logger.info(f"Processing query with graph app for session: {session_id}")
-        response = graph_app.invoke(
-            {"messages": session['messages'][-5:]},
-            {"recursion_limit": 150},
-        )
+        
+        # Run synchronous invoke in a thread pool with a timeout
+        try:
+            response = await asyncio.wait_for(
+                asyncio.to_thread(
+                    graph_app.invoke,
+                    {"messages": session['messages'][-5:]},
+                    {"recursion_limit": 50},  # Reduced from 150 to 100 for safety
+                ),
+                timeout=90.0  # 90 second timeout for the entire graph execution
+            )
+        except asyncio.TimeoutError:
+            server_logger.error(f"Graph execution timed out for session {session_id}")
+            return {"response": "The request timed out. Please try a simpler question or try again later.", "session_id": session_id}
         
         if response and "messages" in response and response["messages"] and hasattr(response["messages"][-1], 'content'):
             content = response["messages"][-1].content

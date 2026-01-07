@@ -8,9 +8,7 @@ rough.py
 # json_to_pgvector.py
 
 # Additional files
-/data
 /backup
-/outputs
 /pgdata
 /salescopilot
 /models
@@ -22,7 +20,6 @@ rough.py
 env/
 venv/
 .venv/
-.env.local
 
 # IDE
 .vscode/

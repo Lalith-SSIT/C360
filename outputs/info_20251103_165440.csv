@@ -1,0 +1,6 @@
+account_id,industry,sub_industry,region,country,state,city,postal_code,customer_since,status,account_name,account_manager,employee_count,customer_lifecycle_stage,account_score
+ACC-000001,Finance,Banking,Africa,Morocco,,North Christopher,78142,2023-09-02 08:09:40,Inactive,Fortive Corporation,Kimberly Glover,30446,Brand Ambassador,73
+ACC-000002,Technology,Telecommunications,North America,Canada,Quebec,Rhondaview,36458,2023-03-21 03:48:54,Churned,Entergy Corporation,Jordan Simpson,14861,Brand Ambassador,71
+ACC-000003,Healthcare,Biotechnology,Africa,Kenya,,South Kathyfurt,19873,2021-10-08 22:56:28,Inactive,"Coinbase Global, Inc.",Tammy Rodriguez,28267,New Contact,17
+ACC-000004,Healthcare,Biotechnology,Latin America,Brazil,,Davidchester,96678,2025-03-12 02:18:48,Inactive,"DoorDash, Inc.",Brian Daniels,8750,Trusted Customer,87
+ACC-000005,Manufacturing,Electronics,North America,United States,Illinois,Lake Ashley,21406,2021-07-04 12:49:24,Inactive,"Dropbox, Inc.",Adrian Fischer,27360,Trusted Customer,58

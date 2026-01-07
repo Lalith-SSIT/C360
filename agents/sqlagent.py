@@ -45,6 +45,8 @@ def sql_query_tool(
     
     try:
         with engine.connect() as conn:
+            # Set a 30 second timeout for the statement
+            conn.execute(text("SET statement_timeout = 30000"))
             result = conn.execute(text(query))
             columns = list(result.keys())
             rows = result.fetchall()
